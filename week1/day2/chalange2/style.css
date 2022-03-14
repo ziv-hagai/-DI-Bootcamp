@@ -1,0 +1,130 @@
+@media only screen and min-width: 200px) {
+
+    body {
+        background-color: black ;
+        font-family: 'Smooch Sans', sans-serif;
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    nav {
+        background-color: black ;
+        word-spacing: 50px;
+        position: sticky;
+        top: 0;
+    }
+
+    ul {
+        padding: 10px;
+    }
+
+    li {
+        list-style: none;
+        display: inline;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: yellow;
+    }
+
+    section {
+        height: 60px;
+    }
+
+    nav + section {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    p { 
+        font-style: italic;
+        border-radius: 20px;
+        padding: 20px;
+        text-align: left;
+        max-width: 700px;
+    }
+
+    #m + h1 {
+        background-color: rgb(150, 150, 250);
+        font-weight: bold;
+    }
+
+    #first {
+        background-image: url("1.jpg");
+        background-size: cover;
+        height: 500px;
+        padding: 20px;
+
+    }
+
+    #first > p {
+        background-color: rgba(150, 150, 250, 0.8);
+    }
+
+
+    #h + h1 {
+        background-color: rgb(150, 250, 150);
+        font-weight: bold;
+    }
+
+    #second {
+        background-image: url("2.jpg");
+        background-size: cover;
+        height: 500px;
+        padding: 20px;
+    }
+
+    #second > p {
+        background-color: rgba(150, 250, 150, 0.8);
+    }
+
+
+    #p + h1 {
+        background-color: rgb(250, 150, 150);
+        font-weight: bold;
+    }
+
+    #third {
+        background-image: url("3.jpg");
+        background-size: cover;
+        height: 500px;
+        padding: 20px;
+    }
+
+    #third > p {
+        background-color: rgba(250, 150, 150, 0.8);
+    }
+
+
+    footer {
+        background-color: black ;
+        color: white;
+        position: sticky;
+        bottom: 0;
+        padding: 10px;
+
+    }
+
+    span {
+        margin: 0 20px;
+        font-size: 1.5rem;
+        position: inline-block;
+        white-space: nowrap;
+    }
+}
