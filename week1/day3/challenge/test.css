@@ -1,0 +1,24 @@
+body {
+	display: flex;
+	flex-direction: row;
+	justify-content:  space-between;
+	border: solid 2px red;
+}
+
+section:nth-child(2) {
+	display: flex;
+	flex-direction: row;
+	justify-content:  space-between;
+	flex-grow: 1;
+	align-items: center;
+	padding: 50px;
+}
+
+div {
+	background-color: yellow;
+	border:  2px solid black;
+	width: 100px;
+	height: 100px;
+	margin: 5px;
+	
+}
