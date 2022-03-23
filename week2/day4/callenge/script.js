@@ -1,17 +1,16 @@
-for (let i = 0; i < 7; i++) {
-	let asterisk = '* ';
-	let pyramid = asterisk.repeat(i) + "\n"
-	console.log(pyramid);
+let words = prompt('Write some words separated by commas');
+newWords = words.split(',');
+newWords.sort((a,b) => b.length - a.length)
+let side = newWords[0].length + 4;
+words = words.split(',');
+
+console.log('*'.repeat(side));
+
+for (const item of words) {
+	let spaces = newWords[0].length - item.length;
+	console.log('* '+item+' '.repeat(spaces)+' *');
+	// console.log(spaces)
 }
 
+console.log('*'.repeat(side));
 
-// nested
-
-for (let i = 1; i < 7; i++) {
-	let pyramid = "";
-	for (let j = 1; j <= i; j++) {
-		pyramid += "* ";
-
-	}
-	console.log(pyramid);
-}
