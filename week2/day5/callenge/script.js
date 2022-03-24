@@ -22,6 +22,6 @@ if (bottles === 1) {
 } else if (bottles) {
 	console.log(`	${bottles} bottles of beer on the wall
 	${bottles} bottles of beer
-	Take ${bottles} down, pass it around
+	Take ${bottles} down, pass them around
 	0 bottle of beer on the wall`);
 }
