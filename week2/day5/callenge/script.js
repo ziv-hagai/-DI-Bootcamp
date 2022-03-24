@@ -1,16 +1,27 @@
-let words = prompt('Write some words separated by commas');
-newWords = words.split(',');
-newWords.sort((a,b) => b.length - a.length)
-let side = newWords[0].length + 4;
-words = words.split(',');
+let init = Number(prompt("How many bottles would you like?"))
 
-console.log('*'.repeat(side));
+console.log(`	${init} bottles of beer on the wall
+	${init} bottles of beer
+	Take 1 down, pass it around
+	${init-1} bottles of beer on the wall`);
 
-for (const item of words) {
-	let spaces = newWords[0].length - item.length;
-	console.log('* '+item+' '.repeat(spaces)+' *');
-	// console.log(spaces)
+let bottles = init-1
+
+for (let i=2; i<=bottles; i++) {
+	console.log(`	${bottles} bottles of beer on the wall
+	${bottles} bottles of beer
+	Take ${i} down, pass them around
+	${bottles-i} bottles of beer on the wall`)
+	bottles -= i; 
 }
-
-console.log('*'.repeat(side));
-
+if (bottles === 1) {
+	console.log(`	1 bottle of beer on the wall
+	1 bottle of beer
+	Take 1 down, pass it around
+	0 bottle of beer on the wall`);
+} else if (bottles) {
+	console.log(`	${bottles} bottles of beer on the wall
+	${bottles} bottles of beer
+	Take ${bottles} down, pass it around
+	0 bottle of beer on the wall`);
+}
