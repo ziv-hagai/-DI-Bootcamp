@@ -9,6 +9,8 @@ console.log('*'.repeat(side));
 for (const item of words) {
 	let spaces = newWords[0].length - item.length;
 	console.log('* '+item+' '.repeat(spaces)+' *');
+	// console.log(spaces)
 }
+
 console.log('*'.repeat(side));
 
