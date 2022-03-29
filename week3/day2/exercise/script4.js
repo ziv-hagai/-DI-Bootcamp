@@ -1,14 +1,11 @@
-
 let form = document.querySelector("form")
 
-
 function showV (e) {
-	let r = document.getElementById("radius").value
-	let v = document.getElementById("volume").value
+	e.preventDefault();
+	let r = Number(document.getElementById("radius").value)
+	let v = document.getElementById("volume")
 	let c = 4/3*Math.PI*r**3
-	v = c
-
+	v.value = c
 }
 
 form.addEventListener("submit", showV);
-
