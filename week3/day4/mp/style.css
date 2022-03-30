@@ -1,0 +1,46 @@
+body {
+	background-color: darkgrey;
+	display: block;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.row {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.colors {
+	display: inline-grid;
+	grid-gap: 5px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(8, 1fr);
+	height: 100vh;
+	padding: 5px;
+}
+
+button {
+	grid-column: 1/4;
+	border-radius: 10px;
+	font-size: 1.5em;
+}
+
+
+
+.board {
+	display: grid;
+	grid-template-columns: repeat(60, 1fr);
+	height: 100vh;
+	padding: 5px 5px 5px 0;
+}	
+
+.board > div {
+	border: 1px lightgrey solid;
+	background-color: white;
+	display: block;
+}
