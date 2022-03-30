@@ -44,8 +44,8 @@ function paint (e){
 }
 
 // clear
-clear.addEventListener("click", refresh)
-
-function refresh () {
-	location.reload()
-}
+clear.addEventListener('click',function(){
+	for(i of blanks){
+		i.style.backgroundColor = "white";
+	}
+})
