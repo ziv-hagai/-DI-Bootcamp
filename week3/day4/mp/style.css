@@ -23,11 +23,17 @@ body {
 	height: 100vh;
 	padding: 5px;
 }
+.colors > div {
+	border-radius: 10px;
+}
+
 
 button {
 	grid-column: 1/4;
 	border-radius: 10px;
+	border: none;
 	font-size: 1.5em;
+
 }
 
 
