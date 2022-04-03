@@ -2,7 +2,7 @@ let board = document.querySelector(".board");
 let blanks = board.getElementsByTagName("div");
 let side = document.querySelector(".colors");
 let colors = side.getElementsByTagName("div");
-let currentColor = '0';
+let currentColor;
 let mouseDown = false;
 let body = document.getElementsByTagName("body")[0];
 let clear = body.getElementsByTagName('button')[0];
@@ -24,22 +24,22 @@ function pickColor(e){
 }
 
 // paint
-body.addEventListener("mousedown",function(e){
-	mouseDown = true;
-})
-
-body.addEventListener("mouseup",function(e){
-	mouseDown = false;
-})
 
 for (let i of blanks) {
 	i.addEventListener("mouseover", paint)
+	i.addEventListener("mousedown",function(e){
+		mouseDown = true;
+		paint(e)
+	})
+	i.addEventListener("mouseup",function(e){
+		mouseDown = false;
+	})
 }
-
 
 function paint (e){
 	if (mouseDown) {
 		e.target.style.backgroundColor = currentColor;
+		console.log(e.target)
 	}	
 }
 
