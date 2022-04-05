@@ -39,45 +39,44 @@ moreToGrams();
 
 // 5
 
-function makeJuice (size) {
-    let ingredients = []
+// function makeJuice (size) {
+//     let ingredients = []
 
-    function addIngredients (a="a",b="b",c="c") {
-        ingredients.push(a,b,c); 
-    }
-
-    addIngredients()
-
-    function displayJuice (element, index) {
-        console.log (`The client wants a ${size} juice, containing ${element[0]}, ${element[1]}, ${element[2]}`)
-    };
-    ingredients.forEach(displayJuice())
-    addIngredients()
-    addIngredients()
-    displayJuice()
-} 
-makeJuice()
-
-
-// let userIngredients = prompt("what ingredients do you want"); //milk, banana, apple
-// let userIngredientsArray = userIngredients.split(", "); //["milk", "banana", "apple"];
-
-// // outer function
-// function makeJuice (sizeJuice) {
-
-//     // inner function
-//     function addIngredients (first, second, third){
-//         let newP =  document.createElement("p");
-//         let text = document.createTextNode(`The client wants a ${sizeJuice} juice, 
-//             containing ${first} ${second} ${third}`)
-//         newP.appendChild(text);
-//         document.body.appendChild(newP);
+//     function addIngredients (a="a",b="b",c="c") {
+//         ingredients.push(a,b,c); 
 //     }
 
-//     // addIngredients("milk","apple", "strawberry");
-//     // spread operator
-//     addIngredients(...userIngredientsArray);
+//     addIngredients()
 
-// }
+//     function displayJuice (element, index) {
+//         console.log (`The client wants a ${size} juice, containing ${element[0]}, ${element[1]}, ${element[2]}`)
+//     };
+//     ingredients.forEach(displayJuice())
+//     addIngredients()
+//     addIngredients()
+//     displayJuice()
+// } 
+// makeJuice()
 
-// makeJuice("small"); 
+
+
+function makeJuice (sizeJuice) {
+    let ingredients = []
+
+    function addIngredients (first='a', second='b', third='c'){
+        ingredients.push(first, second, third);
+    }
+    addIngredients();
+    addIngredients();
+
+    function displayJuice () {
+        let newP =  document.createElement("p");
+        let text = document.createTextNode(`The client wants a ${sizeJuice} juice, 
+            containing ${ingredients[0]} ${ingredients[1]} ${ingredients[2]}`)
+        newP.appendChild(text);
+        document.body.appendChild(newP);    
+    };
+    displayJuice()
+}
+
+makeJuice("small"); 
