@@ -18,15 +18,20 @@ body {
 	flex-direction: column;
 	align-items: center;
 }
+.btn-group {
+	width:  80%;
+	align-items: center;
+	display: flex;
+	margin: auto;
+}
 
-.buttons {
+.down {
 	width:  80%;
 	align-items: center;
 	display: grid;
-	grid-gap: 5px;
+	grid-gap: 20px;
 	grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-	margin: auto;
+	margin: 50px auto;
 }
 
 #start {
@@ -41,7 +46,6 @@ button {
 	background-color: MediumSeaGreen;
 	border:  none;
 	border-radius: 10px;
-	margin: 10px;
 	transition: all .2s ease-in-out; 
 
 }
@@ -49,6 +53,6 @@ button {
 button:hover {
 	transform: scale(1.05); 
 
-	/*background-color: MediumSpringGreen;
-	color: MediumSeaGreen;*/
+	background-color: MediumSpringGreen;
+	color: MediumSeaGreen;
 }

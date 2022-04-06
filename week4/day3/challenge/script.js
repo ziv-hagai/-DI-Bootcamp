@@ -7,11 +7,13 @@ let inventory = [
 ];
 
 function getCarHonda(carInventory) {
-    let firstHonda = inventory.find(item => item.car_make === "Honda");
+    let firstHonda = carInventory.find(item => item.car_make === "Honda");
     let thisCar = `This is a ${firstHonda.car_make} ${firstHonda.car_model} from ${firstHonda.car_year}`
+    console.log(thisCar)
     return thisCar;
-}
 
+}
+getCarHonda(inventory)
 function sortCarInventoryByYear(carInventory) {
     let sorted = [...inventory];
     sorted = sorted.sort(function (x,y) {

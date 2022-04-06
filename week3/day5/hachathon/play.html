@@ -10,17 +10,36 @@
 </style>
 </head>
 <body>
-  <nav id='up'>
-    <div>name</div>
-    <div>lives</div>
-    <div>score</div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">?</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Name</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Lives</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Score</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
+
   <p id='exercise'>a + b = ?</p>
 
+
+
   <nav id='down'>
-    <div>&#9658</div>
-    <div>time line</div>
-    <div>exit</div>
+    <button>&#9658</button>
+    <button>...</button>
+    <button>exit</button>
   </nav>
 
   <script type="text/javascript" src="play.js"></script>

@@ -14,14 +14,22 @@
     <h1>Hi</h1>
     <h2>What would you like to practice?</h2>
   </div>
-  <section class='buttons'>
-    <button>+</button>
-    <button>-</button>
-    <button>&times</button>
-    <button>&#247</button>
+  <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+    <label class="btn btn-outline-light" for="btncheck1">+</label>
+
+    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+    <label class="btn btn-outline-light" for="btncheck2">-</label>
+
+    <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+    <label class="btn btn-outline-light" for="btncheck3">&times</label>
+    <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+    <label class="btn btn-outline-light" for="btncheck4">&#247</label>
+  </div>
+  <div class='down'>
     <button id='start'>Start</button>
     <button id='info'>Info</button>
-  </section>
+  </div>
   <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
