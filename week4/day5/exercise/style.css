@@ -1,0 +1,41 @@
+
+body {
+	background: url(./assets/robots.jpg) no-repeat center center fixed; 
+	background-size: cover;
+	padding: 0;
+}
+span {
+	font-family: 'SEGA LOGO FONT', sans-serif;
+	font-size: 2rem;
+
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 20px;
+	width: 100wh;
+}
+
+section > div {
+	max-width: 400px;
+	background-color: black;
+	color:  white;
+	border-radius: 10px;
+	align-items: center;
+	padding: 20px;
+	margin: 20px;
+}
+
+img {
+	border-radius: 50%;
+	background-color: white;
+}
+img + p  {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+
+

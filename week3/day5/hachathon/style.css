@@ -1,7 +1,11 @@
 body {
-	background-image: url(./assets/bg.jpg);
+	background-image: url(./assets/bg.jpg) no-repeat center center fixed; 
+	background-size: cover;
+	padding: 0;
+
 	font-family: 'Lobster';
-	background-repeat: no-repeat;
+	
+	height: 100vh;
 }
 
 * {
@@ -43,7 +47,7 @@ body {
 }
 
 button {
-	background-color: MediumSeaGreen;
+	background-color: #198754;
 	border:  none;
 	border-radius: 10px;
 	transition: all .2s ease-in-out; 
@@ -53,6 +57,6 @@ button {
 button:hover {
 	transform: scale(1.05); 
 
-	background-color: MediumSpringGreen;
-	color: MediumSeaGreen;
+	background-color: MediumSeaGreen;
+	color: #198754;
 }
