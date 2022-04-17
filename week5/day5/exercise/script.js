@@ -29,7 +29,7 @@ async function getSomebody () {
 			for (let i=0; i<keysArray.length; i++) {
 				let p = document.createElement("p");
 				let text = document.createTextNode(`${keysArray[i]}: ${valuesArray[i]}`);
-				p.appendChild(text);
+				p.appendChild(text, form[3]);
 				div.appendChild(p);
 			}
 		}
