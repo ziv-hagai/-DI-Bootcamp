@@ -27,9 +27,7 @@ async function convert(e) {
 	let convertResult = await convertApi.json();
 	let result = convertResult.conversion_result;
 	let div = document.getElementsByTagName("div")[0];
-	resltText = document.createTextNode(`${result} ${to}`);
-	div.innerHTML = '';
-	div.appendChild(resltText);
+	div.textContent=`${result} ${to}`;
 }
 
 

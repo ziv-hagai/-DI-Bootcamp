@@ -7,33 +7,23 @@
   <script src="https://kit.fontawesome.com/3c8550e264.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Hubballi&family=Lobster&family=Smooch+Sans&family=Space+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="play.css">
-</style>
 </head>
 <body>
   <nav class="navbar navbar-dark bg-success">
-    <!-- navbar-expand-lg -->
-    <!-- <div class="container-fluid">
-      <a class="navbar-brand" href="#">?</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav"> -->
-        <ul class="navbar-nav">
-          <li class="nav-item">Name</li>
-          <li class="nav-item">Lives
-            <span id="red"> &#9632 </span> 
-            <span id="yellow"> &#9632 </span> 
-            <span id="green"> &#9632 </span> 
-          </li>
-          <li class="nav-item">Score</li>
-        </ul>
-      </div>
-    </div>
+    <ul class="navbar-nav">
+      <li class="nav-item">Name</li>
+      <li class="nav-item">Lives
+        <span id="red"> &#9632 </span> 
+        <span id="yellow"> &#9632 </span> 
+        <span id="green"> &#9632 </span> 
+      </li>
+      <li class="nav-item">Score <span id="score">0 </span></li>
+    </ul>
   </nav>
-  <div id='exercise'>
-    <p>a + b = ?</p>
-  </div>
-  <div id='dial'>
+  <section id='up'>
+    <span id='exercise'>a</span><input type="text" name="input">
+  </section>
+  <section id="pad">
     <div class="buttons">
       <div class="button">1</div>
       <div class="button">2</div>
@@ -44,17 +34,16 @@
       <div class="button">7</div>
       <div class="button">8</div>
       <div class="button">9</div>
-      <div class="button">&#9003</div>
+      <div id='del'>&#9003</div>
       <div class="button">0</div>
-      <div id='enter' class="button">&#x23CE</div>
+      <div id='enter'>&#x23CE</div>
     </div>
-  </div>
+  </section>
   <nav id='down'>
-    <button class="bg-gradient-success">&#9658</button>
-    <span>(time line)</span>
-    <button>Exit</button>
+    <button id='play'>&#9658</button>
+    <div id="time">&nbsp</div>
+    <button id='exit'>Exit</button>
   </nav>
-
   <script type="text/javascript" src="play.js"></script>
 </body>
 </html>

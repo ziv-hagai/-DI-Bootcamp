@@ -2,44 +2,45 @@ body {
 	background: url(./assets/bg.jpg) no-repeat center center fixed;
 	background-size: cover;
 	font-family: 'Lobster';
-
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	height: 100vh;
 }
 
 * {
-	font-size: 2rem;
-	padding: 0;
-	margin: 0;
+	font-size: 3em;
 	color: white;
 }
 
 .title {
-	margin: 50px 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
-.btn-group {
-	width:  80%;
-	align-items: center;
-	display: flex;
-	margin: auto;
+
 }
 
+h5 {
+	color: lightgreen;
+}
+
+.btn-group {
+	width:  60%;
+	align-items: center;
+}
+
+.btn {
+	background-color: rgba(0,0,0,0.2);
+}
 .down {
 	width:  80%;
-	align-items: center;
-	display: grid;
+	display: flex;
+	justify-content: space-evenly;
+	/*display: grid;
 	grid-gap: 20px;
 	grid-template-columns: repeat(4, 1fr);
-	margin: 50px auto;
-}
-
-#start {
-	grid-column: 1/3;
-}
-
-#info {
-	grid-column: 3/5;
+	margin: 50px auto;*/
 }
 
 button {
@@ -47,11 +48,11 @@ button {
 	border:  none;
 	border-radius: 10px;
 	transition: all .2s ease-in-out; 
-
+	padding: 0 50px;
+	font-size: 1.5rem;
 }
 
 button:hover {
 	transform: scale(1.05); 
-
 	background-color: MediumSeaGreen;
 }
