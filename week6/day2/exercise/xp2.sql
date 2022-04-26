@@ -34,12 +34,13 @@ SELECT * FROM film ORDER BY rental_rate LIMIT 10
 SELECT * FROM film ORDER BY rental_rate OFFSET 10 LIMIT 10 
 
 --12
-
+SELECT amount,payment_date, payment.customer_id, first_name, last_name FROM payment
+INNER JOIN customer ON payment.customer_id=customer.customer_id ORDER BY customer_id
 -- Write a query which will join the data in the customer table and the payment table. 
 -- You want to get the amount and the date of every payment made by a customer, ordered by their id (from 1 to…).
 
 --13
--- You need to check your inventory. Write a query to get all the movies which are not in inventory.
+SELECT * FROM film WHERE film_id NOT IN (SELECT film_id FROM inventory)
 
 --14
--- Write a query to find which city is in which country.
+SELECT city,country,city.country_id FROM city INNER JOIN country ON city.country_id = country.country_id
