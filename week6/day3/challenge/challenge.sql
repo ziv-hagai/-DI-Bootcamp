@@ -51,14 +51,14 @@ VALUES
 	('To kill a mockingbird', 'Harper Lee')
 
 --3
-CREATE TABLE studet (
+CREATE TABLE student (
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(255) NOT NULL UNIQUE, 
 	age smallint CHECK (age <= 15)
 )
 
 --4
-INSERT INTO studet (name, age)
+INSERT INTO student (name, age)
 VALUES
 	('John', 12),
 	('Lera', 11),
@@ -67,29 +67,32 @@ VALUES
 	
 --5
 CREATE TABLE library (
-	book_id SMALLINT REFERENCES book (id) ON DELETE CASCADE ON UPDATE CASCADE , 
-	student_id SMALLINT REFERENCES studet (id) ON DELETE CASCADE ON UPDATE CASCADE , 
+	book_id SMALLINT REFERENCES book (id) ON DELETE CASCADE ON UPDATE CASCADE, 
+	student_id SMALLINT REFERENCES student (id) ON DELETE CASCADE ON UPDATE CASCADE , 
 	borrowed_date DATE
+	PRIMARY KEY(book_id,student_id)
 )
 
 --6
 INSERT INTO library (book_id, student_id, borrowed_date)
 VALUES
-((SELECT id FROM book WHERE title='Alice In Wonderland'),(SELECT id FROM studet WHERE name='John'), '15/02/2022'),
-((SELECT id FROM book WHERE title='To kill a mockingbird'),(SELECT id FROM studet WHERE name='Bob'), '03/03/2021'),
-((SELECT id FROM book WHERE title='Alice In Wonderland'),(SELECT id FROM studet WHERE name='Lera'), '23/05/2021'),
-((SELECT id FROM book WHERE title='Harry Potter'),(SELECT id FROM studet WHERE name='Bob'), '12/08/2021')
+((SELECT id FROM book WHERE title='Alice In Wonderland'),(SELECT id FROM student WHERE name='John'), '15/02/2022'),
+((SELECT id FROM book WHERE title='To kill a mockingbird'),(SELECT id FROM student WHERE name='Bob'), '03/03/2021'),
+((SELECT id FROM book WHERE title='Alice In Wonderland'),(SELECT id FROM student WHERE name='Lera'), '23/05/2021'),
+((SELECT id FROM book WHERE title='Harry Potter'),(SELECT id FROM student WHERE name='Bob'), '12/08/2021')
 
 --7
+SELECT * FROM library
+
 SELECT name, title, borrowed_date FROM library
-JOIN studet ON studet.id=library.student_id
+JOIN student ON student.id=library.student_id
 JOIN book ON book.id=library.book_id
 
-SELECT avg(age) FROM studet
-JOIN library ON studet.id=library.student_id
+SELECT avg(age) FROM student
+JOIN library ON student.id=library.student_id
 JOIN book ON book.id=library.book_id
 WHERE title = 'Alice In Wonderland'
 
-DELETE FROM studet WHERE name='Bob' 
+DELETE FROM student WHERE name='Bob' 
 --Bob's borrows was also deleted
 
