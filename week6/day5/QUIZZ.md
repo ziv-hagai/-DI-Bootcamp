@@ -27,11 +27,11 @@ console.log(all)
 
 ```javascript
 let golf = {
-   type: "sport",
-   clubs: {
-     high_end: "taylor made",
-     low_end: "rusty basement clubs"
- }
+ type: "sport",
+ clubs: {
+   high_end: "taylor made",
+   low_end: "rusty basement clubs"
+}
 }  
 golf.clubs.high_end = "callaway";
 console.log(golf.clubs.high_end);
@@ -42,7 +42,7 @@ callaway
 
 ```javascript
 const x = function(a, b){
- return a*b;
+   return a*b;
 }
 ```
 yes, x(a,b)
@@ -51,7 +51,7 @@ yes, x(a,b)
 
 ```javascript
 function x() {
-   a = 5;
+ a = 5;
 }
 ```
 no, its inside the function scope
@@ -62,7 +62,7 @@ no, its inside the function scope
 
 ```javascript
 function sayHello() {
- return "Hello, ";
+   return "Hello, ";
 }
 function greeting(helloMessage, name) {
   console.log(helloMessage() + name);
@@ -95,10 +95,10 @@ console.log("the answer to everything is", sum(42,0))
 
 ```javascript
 function foo () {
- function bar() {
-   return "Poppin' bottles";
-}
-return bar();
+   function bar() {
+     return "Poppin' bottles";
+ }
+ return bar();
 }
 console.log(foo());
 ```
@@ -204,28 +204,28 @@ input.forEach((e,i) => input[i]=e**2); //code
 
  ```javascript
  function Item(name, price) {
-     this.name = name;
-     this.price = price;
-     this.displayInfo = function() {
-         console.log(this.name + " is for $ " + this.price)
-     }
- } 
+   this.name = name;
+   this.price = price;
+   this.displayInfo = function() {
+       console.log(this.name + " is for $ " + this.price)
+   }
+} 
 
- const cake = new Item("Chocolate Cake", 10);
- cake.displayInfo();
- ```
- "Chocolate Cake is for $ 10"
+const cake = new Item("Chocolate Cake", 10);
+cake.displayInfo();
+```
+"Chocolate Cake is for $ 10"
 
- 20. Refactor this code using Classes
+20. Refactor this code using Classes
 
- class Item {
+class Item {
     constructor(name, price) {
-     this.name = name;
-     this.price = price;
- }
- displayInfo = function() {
-     console.log(this.name + " is for $ " + this.price)
- }
+       this.name = name;
+       this.price = price;
+   }
+   displayInfo = function() {
+       console.log(this.name + " is for $ " + this.price)
+   }
 }
 
 const cake = new Item("Chocolate Cake", 10);
@@ -250,13 +250,13 @@ Promise.resolve('Success!')
 
 ```javascript
 const p = new Promise(function(resolve, reject) {
- setTimeout(function() {
-  resolve("OK");
-}, 2000);
+   setTimeout(function() {
+      resolve("OK");
+  }, 2000);
 });
 
 p.then().then(function(data) {
- console.log(data);
+   console.log(data);
 });
 ```
 
@@ -294,7 +294,7 @@ async function getData() {
     }
 }
 
-async function display (x) {
+function display (x) {
     let p = document.createElement('p')
     let inP = document.createTextNode(x)
     p.appendChild(inP)
