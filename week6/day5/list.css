@@ -1,0 +1,19 @@
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+form {
+	width:  70%;
+}
+
+* {
+	margin: 10px;
+}
+
+button {
+	border: none;
+	margin-right: 10px;
+}
+

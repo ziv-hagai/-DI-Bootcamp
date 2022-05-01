@@ -1,14 +1,31 @@
-let dom = () => {
-	let p = document.createElement("p")
-	let text = document.createTextNode("New Paragraph")
-	p.appendChild(text)
-	document.body.appendChild(p)
-	p.addEventListener('mouseover',function() {
-		this.style.color='red'
-	});
-	p.addEventListener('mouseout',function() {
-		this.style.color='black'
-	});
+const tasks = JSON.parse(localStorage.getItem("tasks")) || []
+
+let taskForm = document.getElementsByTagName('input')
+document.forms[0].addEventListener('submit', getInput) 
+
+function getInput (e) {
+    e.preventDefault()
+    let name = taskForm[0].value
+    let description = taskForm[1].value
+    let start = taskForm[2].value
+    let end = taskForm[3].value
+    let done = false
+    const task = new toObj(name,description,start,end,done);
+    tasks.push(task);
+    
+    localStorage.clear();
+    localStorage.setItem("tasks", JSON.stringify(tasks));  
+    window.location.replace("list.html");
+    
 }
 
-document.getElementsByTagName("button")[0].addEventListener("click",dom)
+class toObj {
+    constructor (name,description,start,end,done) {
+       this.name = name;
+       this.description = description;
+       this.start = start;
+       this.end = end;
+       this.done = done;
+   }
+}
+
