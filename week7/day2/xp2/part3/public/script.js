@@ -1,0 +1,1 @@
+document.getElementsByTagName('h1')[0].addEventListener('click',(e)=>e.target.style.color='blue')
