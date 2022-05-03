@@ -16,7 +16,6 @@ app.get('/aboutMe/:hobby', (req, res)=> {
     res.json(myHobby)
     }
 });
-app.use('/form',express.static(__dirname+'/public'));
 
 app.get('/pic', (req, res) => {
     res.sendFile(__dirname+'/public/pic.html')

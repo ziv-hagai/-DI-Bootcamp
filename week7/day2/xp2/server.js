@@ -7,6 +7,7 @@ app.listen(3002, () => {
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+//to get data from the body
 
 app.get('/', (req, res) => {
     const user = {
@@ -16,4 +17,4 @@ app.get('/', (req, res) => {
     res.json(user);
 })
 
-// app.use('/',express.static(__dirname+'/public'));
+app.use('/home',express.static(__dirname+'/public'));
