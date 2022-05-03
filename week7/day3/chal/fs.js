@@ -15,29 +15,7 @@ fs.readFile('./RightLeft.txt', (err, data)=>{
     }
 
     let position = 0;
-    let minusOne = arr.map((e) => {
-      if (e =='>') {
-    position +=1;
-  } else {
-    position -= 1;
+    let minusOne = arr.map((e) => position += (e=='>') ? 1 : -1 )
+    console.log(`first time on the left: step #${minusOne.indexOf(-1)+1}`);
   }
-    return position;  
-})
-console.log(`first time on the left side at step #${minusOne.indexOf(-1)+1}`);
-  
-// let position = 0;
-// let index = 0
-// while (position !== -1) {
-//   for (let j of arr) {
-//       if (j=='>') {
-//         position += 1;
-//         index += 1;
-//       } else {
-//         position -= 1;
-//         index += 1;
-//       }
-//   } //for     
-// } //while
-// console.log(index)
-}
 })
