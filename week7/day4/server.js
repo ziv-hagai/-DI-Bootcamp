@@ -71,15 +71,17 @@ app.delete('/api/product/:id',(req,res)=>{
         res.json({message:err.message})
     })
 })
+// update 
 
-app.put('/api/product/:id',(req,res)=>{
-    updateProduct(req.params.id)
+app.put('/api/cproduct/:id',(req,res)=>{
+    console.log(req.body);
+    changeProduct(req.params.id, req.body.cname, req.body.cprice)
     .then(data=>{
-        res.json(data)
+        res.json(data);
     })
-    .catch(err=>{
+    .catch(err => {
         console.log(err);
-        res.json({message:err.message})
+        res.json({message:err.message});
     })
 })
 

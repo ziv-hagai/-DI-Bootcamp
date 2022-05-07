@@ -19,6 +19,7 @@ const getAllProducts = () => {
     return db('products')
     .select('id','name','price')
     .orderBy('id')
+    
 }
 
 const getProduct = (product_id) =>{

@@ -1,0 +1,60 @@
+body {
+background: url(./assets/bg.jpg) no-repeat center center fixed;
+background-size: cover;
+font-family: 'Lobster';
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-evenly;
+height: 100vh;
+}
+
+* {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.title {
+display: flex;
+flex-direction: column;
+align-items: center;
+
+}
+
+h5 {
+color: lightgreen;
+}
+
+.table {
+    width: 80%;
+}
+
+thead  {
+    background-color: white;
+}
+
+thead > * > * {
+    color: #198754;
+    margin: auto;
+}
+
+.down {
+width:  80%;
+display: flex;
+justify-content: space-evenly;
+}
+
+button {
+background-color: #198754;
+border:  none;
+border-radius: 10px;
+transition: all .2s ease-in-out; 
+padding: 0 10px;
+font-size: 1rem;
+min-width: 200px;
+}
+
+button:hover {
+transform: scale(1.05); 
+background-color: MediumSeaGreen;
+}
