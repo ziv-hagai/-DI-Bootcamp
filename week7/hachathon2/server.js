@@ -1,15 +1,17 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const knex = require('knex');
-const createApplication = require('express/lib/express');
+// const createApplication = require('express/lib/express');
+const app = express();
+app.use(express.urlencoded({extended:true}));
 
-const record = require('./public/records.js');
-console.log(record.topFive);
+// app.use(express.json());
+
+
 
 dotenv.config();
-
-const app = express();
-app.use(express.json());
+// const record = require('./public/records.js');
+// console.log(record.topFive);
 
 app.listen(process.env.PORT||8080, ()=>{
   console.log(`listen on port ${process.env.PORT||8080}`);
@@ -28,36 +30,38 @@ const db = knex({
 
 app.use('/', express.static(__dirname+'/public'));
 
-// app.get('/records',(req,res) => {
-//   // for example get the recorde from db
-//   const records = [
-//     {name:'aaa', score:67},
-//     {name:'bbb', score:50},
-//     {name:'ccc', score:89},
-//   ]
-//   res.json({redords:records})
-// })
-
 app.get('/records',(req,res) => {
-  return db('records')
-    .select('name','record', 'date')
+  res.sendFile(__dirname+'/public/records.html')
+})
+
+app.get('/play',(req,res) => {
+  res.sendFile(__dirname+'/public/play.html')
+})
+
+//display records
+app.post('/records',(req,res) => {
+return db('records')
+    .select('player_name','record', 'record_date')
     .orderBy('record', 'desc')
     .limit(5)
     .returning('*')
-    // res.json({redords:records})
-    // console.log(res)
-
+    .then(records=>{
+      console.log(records)
+      res.json(records)
+    })
   .catch(err => {
   console.log(err);
   res.json({message:err.message});
   })
 })
- 
-const score = {player_name: 'a', record: '10', record_date: '2022-05-07'}
 
-app.post('/records', (req,res) => {
+ //example
+const score = {player_name: 'z', record: '100', record_date: '2022-05-08'}
+
+//add a record
+app.post('/db', (req,res) => {
   return db('records')
-.insert(score)
+.insert(json(score))
 .returning('*')
 .then(data => {
   console.log(data);
@@ -66,3 +70,21 @@ app.post('/records', (req,res) => {
   console.log(err);
 })
 })
+
+
+// app.get('/records',(req,res) => {
+//   res.sendFile(__dirname+'/public/records.html')
+// })
+
+// app.get('/records',(req,res) => {
+//   // for example get the recorde from db
+//   const records = [
+//     {name:'aaa', score:67},
+//     {name:'bbb', score:50},
+//     {name:'ccc', score:89},
+//   ]
+//   console.log(records);
+//   res.json({redords:records})
+//   console.log({redords:records});
+
+// })

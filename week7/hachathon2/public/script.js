@@ -33,8 +33,8 @@ function goToPlay() {
     let name = document.getElementsByClassName('input')[0].value;
     if (name) {
         localStorage.setItem('name', name)
-        window.location.href='play.html'
-    } else {
+        window.location.href='//localhost:7000/play'
+        } else {
         alert('Enter Your Name')
     }
 }

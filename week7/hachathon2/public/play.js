@@ -6,7 +6,6 @@ document.getElementById('del').addEventListener('click', clickDel);
 
 let player = localStorage.getItem('name');
 document.getElementsByClassName('nav-item')[0].innerHTML=player;
-console.log(player)
 
 let a;
 let b;
@@ -26,7 +25,6 @@ let timeInt;
 
 const pause = document.getElementById('pause');
 let paused = false;
-console.log(paused)
 pause.addEventListener('click', togglePause);
 
 function modal() {
