@@ -1,17 +1,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const knex = require('knex');
-// const createApplication = require('express/lib/express');
 const app = express();
 app.use(express.urlencoded({extended:true}));
-
-// app.use(express.json());
-
-
+app.use(express.json());
 
 dotenv.config();
-// const record = require('./public/records.js');
-// console.log(record.topFive);
 
 app.listen(process.env.PORT||8080, ()=>{
   console.log(`listen on port ${process.env.PORT||8080}`);
@@ -46,7 +40,6 @@ return db('records')
     .limit(5)
     .returning('*')
     .then(records=>{
-      console.log(records)
       res.json(records)
     })
   .catch(err => {
@@ -55,36 +48,17 @@ return db('records')
   })
 })
 
- //example
-const score = {player_name: 'z', record: '100', record_date: '2022-05-08'}
-
 //add a record
 app.post('/db', (req,res) => {
+  console.log(req.body);
   return db('records')
-.insert(json(score))
+.insert(req.body)
 .returning('*')
 .then(data => {
   console.log(data);
+  res.json(data)
 })
 .catch(err => {
   console.log(err);
 })
 })
-
-
-// app.get('/records',(req,res) => {
-//   res.sendFile(__dirname+'/public/records.html')
-// })
-
-// app.get('/records',(req,res) => {
-//   // for example get the recorde from db
-//   const records = [
-//     {name:'aaa', score:67},
-//     {name:'bbb', score:50},
-//     {name:'ccc', score:89},
-//   ]
-//   console.log(records);
-//   res.json({redords:records})
-//   console.log({redords:records});
-
-// })

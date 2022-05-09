@@ -115,6 +115,7 @@ function clickEnter () {
 		
 	localStorage.removeItem('score');
 	localStorage.setItem('score', currentScore);
+	console.log(currentScore);
 	score.textContent = currentScore;
 	clearInterval(timeInt);
 	timeInt = null;
