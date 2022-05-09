@@ -7,8 +7,6 @@ let today = new Date();
   const score = {player_name:localStorage.name, record:localStorage.score, record_date:today};
 
 (function add(){ 
-  
-
 fetch('http://localhost:7000/db',{
   method:'POST',
   headers:{
@@ -19,13 +17,14 @@ fetch('http://localhost:7000/db',{
 .then(res=>res.json())
 .then(data=>{
   console.log(data)
+  display()
 })
 .catch(err=>{
   console.log(err);
 });
 })();
 
-(function display(){
+function display(){
     fetch('http://localhost:7000/records',{
       method:'POST',
       headers:{
@@ -45,4 +44,4 @@ fetch('http://localhost:7000/db',{
     .catch(err=>{
       console.log(err);
     })
-  })()
+  }
