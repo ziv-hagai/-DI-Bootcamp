@@ -11,13 +11,12 @@ class App extends React.Component {
           {name: "JavaSript", votes: 0},
           {name: "Java", votes: 0}
       ]
-  }
-}
+	}
+	}
 	add (i) {
 		const lanArr = [...this.state.languages];
-    lanArr[i].votes++;
-    this.setState({languages: lanArr});
-		
+    	lanArr[i].votes++;
+    	this.setState({languages: lanArr});
 	}
 
 	render(){

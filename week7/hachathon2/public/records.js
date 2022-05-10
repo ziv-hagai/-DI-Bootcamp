@@ -4,9 +4,15 @@ let today = new Date();
   const yyyy = today.getFullYear();
   today = yyyy + '-' + mm + '-' + dd;
   
-  const score = {player_name:localStorage.name, record:localStorage.score, record_date:today};
+const score = {player_name:localStorage.name, record:localStorage.score, record_date:today};
 
-(function add(){ 
+if (localStorage.name) {
+  add()
+} else {
+  display()
+};
+
+function add(){ 
 fetch('http://localhost:7000/db',{
   method:'POST',
   headers:{
@@ -16,13 +22,13 @@ fetch('http://localhost:7000/db',{
 })
 .then(res=>res.json())
 .then(data=>{
-  console.log(data)
+  // console.log(data)
   display()
 })
 .catch(err=>{
   console.log(err);
 });
-})();
+};
 
 function display(){
     fetch('http://localhost:7000/records',{

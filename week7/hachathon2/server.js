@@ -50,7 +50,6 @@ return db('records')
 
 //add a record
 app.post('/db', (req,res) => {
-  console.log(req.body);
   return db('records')
 .insert(req.body)
 .returning('*')

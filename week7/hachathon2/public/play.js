@@ -14,6 +14,7 @@ let operations = localStorage.getItem('operations').split(',')
 let userRelult = 0;
 let result; 
 
+localStorage.setItem('score', 0);
 let currentScore = Number(localStorage.getItem('score'));
 let score = document.getElementById('score');
 score.textContent = currentScore;
