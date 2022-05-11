@@ -22,7 +22,6 @@ fetch('http://localhost:7000/db',{
 })
 .then(res=>res.json())
 .then(data=>{
-  // console.log(data)
   display()
 })
 .catch(err=>{
@@ -35,11 +34,11 @@ function display(){
       method:'POST',
       headers:{
         'Content-type':'application/json'
-      },
-      body:JSON.stringify(score)
+      }
     })
     .then(res => res.json())
     .then(top=>{
+      console.log(top)
       top.forEach((item,i)=>{
         const td = document.querySelector('tbody').children[i].children;
         td[1].innerText=item.player_name;
