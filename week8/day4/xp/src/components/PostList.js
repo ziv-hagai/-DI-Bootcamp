@@ -1,7 +1,6 @@
 import a from "./data.json";
 
 const PostList = () => {
-    console.log(a)
     return (
         <>
             <h2>First</h2>
