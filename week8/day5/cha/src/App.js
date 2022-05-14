@@ -14,23 +14,30 @@ class App extends Component {
       topScore: 0
     }
   }
+  componentDidUpdate() {
+    if (!this.state.score) {
+      this.state.heros.forEach(e => e.clicked = false)
+    }
+  }
 
   handleClick = (event) => {
     const newHeros = [...this.state.heros];
 
     newHeros.forEach((element) => {
       if (element.id === Number(event.target.id)) {
-        element.clicked ? this.setState({ score: 0 }) : this.setState({ score: this.state.score + 1 });
-        element.clicked = true;
-
+        if (element.clicked) {
+          if (this.state.score > this.state.topScore) {
+            this.setState({ topScore: this.state.score });
+          }
+          this.setState({ score: 0 });
+        } else {
+          this.setState({ score: this.state.score + 1 });
+          element.clicked = true;
+        }
       }
     })
-
     newHeros.sort(() => Math.random() - 0.5);
     this.setState({ heros: newHeros });
-    if (this.state.score > this.state.topScore) {
-      this.setState({ topScore: this.state.score })
-    }
   }
 
   render() {
