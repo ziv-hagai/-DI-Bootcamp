@@ -20,11 +20,12 @@ class App extends Component {
     }
   }
 
-  handleClick = (event) => {
+  handleClick = (id) => {
+    console.log(id);
     const newHeros = [...this.state.heros];
 
     newHeros.forEach((element) => {
-      if (element.id === Number(event.target.id)) {
+      if (element.id === Number(id)) {
         if (element.clicked) {
           if (this.state.score > this.state.topScore) {
             this.setState({ topScore: this.state.score });
@@ -54,7 +55,7 @@ class App extends Component {
                 this.state.heros.map((user, i) => {
                   return (
                     <Card
-                      handleClick={this.handleClick}
+                      handleClick={() => this.handleClick(this.state.heros[i].id)}
                       key={i}
                       clicked={this.state.heros[i].clicked}
                       id={this.state.heros[i].id}
