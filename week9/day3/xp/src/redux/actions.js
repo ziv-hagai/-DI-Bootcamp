@@ -1,27 +1,11 @@
-export const insert = (data) => {
+export const onIncrement = () => {
     return {
-        type: 'INSERT',
-        payload: data
-    }
-};
-
-export const update = (data) => {
-    return {
-        type: 'UPDATE',
-        payload: data
+        type: 'INCREMENT',
     }
 }
 
-export const updateIndex = (index) => {
+export const onDecrement = () => {
     return {
-        type: 'UPDATE_INDEX',
-        payload: index
-    }
-}
-
-export const deleteX = (id) => {
-    return {
-        type: 'DELETE',
-        payload: id
+        type: 'DECREMENT',
     }
 }

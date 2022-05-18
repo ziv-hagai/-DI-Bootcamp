@@ -7,17 +7,7 @@ import SearchBox from './components/SearchBox';
 import './App.css';
 
 import { setSearchField } from './redux/actions';
-const mapStateToProps = (state) => {
-  return {
-    searchField: state.searchRobots.searchField,
-  }
-}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
-  }
-}
 
 class App extends Component {
   constructor() {
@@ -28,10 +18,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(users => { this.setState({ robots: users }) });
+    console.log(this.props.searchField);
+    // this.setState({ robots: this.props.searchField })
   }
+
+
+  // componentDidMount() {
+  //   fetch('https://jsonplaceholder.typicode.com/users')
+  //     .then(response => response.json())
+  //     .then(users => { this.setState({ robots: users }) });
+  // }
 
   render() {
     const { robots } = this.state;
@@ -49,4 +45,15 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    searchField: state.searchRobots.searchField,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+  }
+}
 export default connect(mapStateToProps, mapDispatchToProps)(App);

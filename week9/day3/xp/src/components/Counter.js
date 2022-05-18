@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { onDecrement, onIncrement } from '../redux/actions';
+import { connect } from 'react-redux';
 
 class Counter extends Component {
+
     incrementIfOdd = () => {
-        if (this.props.value % 2 !== 0) {
+        if (this.props.count % 2 !== 0) {
             this.props.onIncrement();
         }
     };
@@ -12,16 +15,16 @@ class Counter extends Component {
     };
 
     render() {
-        const { value, onIncrement, onDecrement } = this.props;
+
         return (
             <p>
-                Clicked: {value} times
+                Clicked: {this.props.count} times
                 {" "}
-                <button onClick={onIncrement}>
+                <button onClick={this.props.onIncrement}>
                     +
                 </button>
                 {" "}
-                <button onClick={onDecrement}>
+                <button onClick={this.props.onDecrement}>
                     -
                 </button>
                 {" "}
@@ -37,7 +40,20 @@ class Counter extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        count: state.count,
+    }
+}
 
-export default Counter;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onIncrement: () => dispatch(onIncrement()),
+        onDecrement: () => dispatch(onDecrement())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+
 
 
