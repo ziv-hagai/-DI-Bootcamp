@@ -16,11 +16,16 @@ class TransactionForm extends React.Component {
         this.baseState = { ...this.state }
     }
 
-    componentDidUpdate() {
-        if (this.props.currentIndex >= 0 && !this.state.edit) {
-            this.setState(this.props.list[this.props.currentIndex]);
-            this.setState({ edit: true });
-            console.log(this.props.currentIndex);
+    componentDidUpdate(prevProps) {
+
+        if (prevProps.currentIndex != this.props.currentIndex && this.props.currentIndex != -1) {
+            const trx = this.props.list[this.props.currentIndex]
+            this.setState({
+                accountNumber: trx.accountNumber || '',
+                FSC: trx.FSC || '',
+                name: trx.name || '',
+                amount: trx.amount || ''
+            })
         }
     }
 
@@ -54,7 +59,7 @@ class TransactionForm extends React.Component {
                     < input name="FSC" placeholder="FSC" onChange={this.handleInputChange} value={this.state.FSC} /><br />
                     < input name="name" placeholder="A/C Holder Name" onChange={this.handleInputChange} value={this.state.name} /><br />
                     < input name="amount" placeholder="Amount" onChange={this.handleInputChange} value={this.state.amount} /><br />
-                    <button type="submit">Submit</button>
+                    <button type="submit">{this.state.edit ? 'update' : "Submit"}</button>
                 </form>
             </>
         );

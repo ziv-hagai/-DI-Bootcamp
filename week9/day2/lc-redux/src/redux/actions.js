@@ -1,19 +1,28 @@
-export const changeFirst = (value) => {
-    return {
-        type: 'CHANGE_FIRST',
-        payload: value
-    }
-};
-export const changeSecond = (value) => {
-    return {
-        type: 'CHANGE_SECOND',
-        payload: value
-    }
-};
+export const handleNames = (type,text) =>{
+  return {
+    type:type,
+    payload:text
+  }
+}
 
-export const calculate = (value) => {
-    return {
-        type: 'CALCULATE',
-        payload: value
-    }
+// export const handleFirstName = (text) => {
+//   // console.log('FIRST_NAME',text);
+//   return {
+//     type:'FIRST_NAME',
+//     payload: text
+//   }
+// }
+//
+// export const handleSecondName = (text) => {
+//   return {
+//     type:'SECONDE_NAME',
+//     payload:text
+//   }
+// }
+
+export const handleResult = (result_obj) => {
+  return {
+    type:'RESULTS',
+    payload: result_obj
+  }
 }
