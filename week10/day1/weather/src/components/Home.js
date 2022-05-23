@@ -1,7 +1,11 @@
+import City from './City';
+
 function Home() {
     return (
         <div >
-            Home
+            <strong>add to favs</strong>
+            <City />
+            <h1>5 day</h1>
         </div>
 
     );

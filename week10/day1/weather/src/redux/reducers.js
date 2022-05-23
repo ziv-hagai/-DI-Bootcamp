@@ -1,3 +1,29 @@
+const athens =
+{
+    "LocalObservationDateTime": "2022-05-24T00:30:00+10:00",
+    "EpochTime": 1653316200,
+    "WeatherText": "Light rain shower",
+    "WeatherIcon": 12,
+    "HasPrecipitation": true,
+    "PrecipitationType": "Rain",
+    "IsDayTime": false,
+    "Temperature": {
+        "Metric": {
+            "Value": 16.4,
+            "Unit": "C",
+            "UnitType": 17
+        },
+        "Imperial": {
+            "Value": 62,
+            "Unit": "F",
+            "UnitType": 18
+        }
+    },
+    "MobileLink": "http://www.accuweather.com/en/au/newmarket/18536/current-weather/18536?lang=en-us",
+    "Link": "http://www.accuweather.com/en/au/newmarket/18536/current-weather/18536?lang=en-us"
+}
+
+
 const athArr = [
     {
         "Version": 1,
@@ -44,128 +70,25 @@ const athArr = [
             "LocalizedName": "Georgia"
         }
     },
-    {
-        "Version": 1,
-        "Key": "28185",
-        "Type": "City",
-        "Rank": 53,
-        "LocalizedName": "Ath",
-        "Country": {
-            "ID": "BE",
-            "LocalizedName": "Belgium"
-        },
-        "AdministrativeArea": {
-            "ID": "WHT",
-            "LocalizedName": "Hainaut"
-        }
-    },
-    {
-        "Version": 1,
-        "Key": "133595",
-        "Type": "City",
-        "Rank": 55,
-        "LocalizedName": "Athis-Mons",
-        "Country": {
-            "ID": "FR",
-            "LocalizedName": "France"
-        },
-        "AdministrativeArea": {
-            "ID": "91",
-            "LocalizedName": "Essonne"
-        }
-    },
-    {
-        "Version": 1,
-        "Key": "193349",
-        "Type": "City",
-        "Rank": 55,
-        "LocalizedName": "Athni",
-        "Country": {
-            "ID": "IN",
-            "LocalizedName": "India"
-        },
-        "AdministrativeArea": {
-            "ID": "KA",
-            "LocalizedName": "Karnataka"
-        }
-    },
-    {
-        "Version": 1,
-        "Key": "2871558",
-        "Type": "City",
-        "Rank": 55,
-        "LocalizedName": "Athirampuzha",
-        "Country": {
-            "ID": "IN",
-            "LocalizedName": "India"
-        },
-        "AdministrativeArea": {
-            "ID": "KL",
-            "LocalizedName": "Kerala"
-        }
-    },
-    {
-        "Version": 1,
-        "Key": "2875600",
-        "Type": "City",
-        "Rank": 55,
-        "LocalizedName": "Atholi",
-        "Country": {
-            "ID": "IN",
-            "LocalizedName": "India"
-        },
-        "AdministrativeArea": {
-            "ID": "KL",
-            "LocalizedName": "Kerala"
-        }
-    },
-    {
-        "Version": 1,
-        "Key": "2916871",
-        "Type": "City",
-        "Rank": 65,
-        "LocalizedName": "Athagad",
-        "Country": {
-            "ID": "IN",
-            "LocalizedName": "India"
-        },
-        "AdministrativeArea": {
-            "ID": "OR",
-            "LocalizedName": "Odisha"
-        }
-    },
-    {
-        "Version": 1,
-        "Key": "222078",
-        "Type": "City",
-        "Rank": 65,
-        "LocalizedName": "Ath Thaniyah",
-        "Country": {
-            "ID": "JO",
-            "LocalizedName": "Jordan"
-        },
-        "AdministrativeArea": {
-            "ID": "KA",
-            "LocalizedName": "Karak"
-        }
-    }
 ];
+
 const initState = {
-    cities: athArr,
-    chosen: ''
+    cities: [],
+    city: athArr[0],
+    current: athens
 }
 
 export const reducer = (state = initState, action = {}) => {
     switch (action.type) {
         case 'COMPLETE':
-            const arr = action.payload
+            // const arr = payload
             console.log(state.cities);
-            return { ...state, cities: [...arr] }
-        case 'SEARCH':
-            return { ...state, text: action.payload }
+            return { ...state, cities: [...athArr] }
+        case 'SHOW':
+            return { ...state, current: { ...athens } }
         case 'CHOOSE':
             console.log(action.payload);
-            return { ...state, chosen: action.payload }
+            return { ...state, city: { ...athArr[0] } }
         default:
             return { ...state }
     }
