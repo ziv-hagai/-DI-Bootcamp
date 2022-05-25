@@ -8,7 +8,7 @@ class Week extends React.Component {
     render() {
         if (this.props.week) {
 
-            console.log(this.props.week.DailyForecasts);
+            // console.log(this.props.week.DailyForecasts);
             return (
                 this.props.week.DailyForecasts.map((day, i) => {
                     return (

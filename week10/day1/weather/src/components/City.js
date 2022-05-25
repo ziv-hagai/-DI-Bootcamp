@@ -1,17 +1,24 @@
 import React from "react";
-
 class City extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isFav: this.props.isFav,
+            isFav: false,
         }
     }
-    addToFav = () => {
-        this.setState({ isFav: !this.state.isFav })
+    componentDidMount() {
+        this.setState({ isFav: Object.keys(localStorage).includes(this.props.cityKey) })
+    }
 
+    componentDidUpdate() {
+        if (this.state.isFav !== Object.keys(localStorage).includes(this.props.cityKey)) {
+            this.setState({ isFav: Object.keys(localStorage).includes(this.props.cityKey) })
+        }
+    }
+    changeFav = () => {
         if (this.state.isFav) {
-            localStorage.removeItem(this.props.name);
+            localStorage.removeItem(this.props.cityKey);
+            this.setState({ isFav: false })
         } else {
             const favCity = {
                 isFav: true,
@@ -21,16 +28,17 @@ class City extends React.Component {
                 text: this.props.text,
                 temp: this.props.temp
             }
-            localStorage.setItem(this.props.name, JSON.stringify(favCity));
+            localStorage.setItem(this.props.cityKey, JSON.stringify(favCity));
+            this.setState({ isFav: true })
         }
     }
 
     render() {
-        console.log(this.props);
-
+        console.log(this.state.isFav,
+            Object.keys(localStorage).includes(this.props.cityKey))
         return (
             <div >
-                save<input type='checkbox' defaultChecked={this.props.isFav} onChange={this.addToFav} />
+                save<input type='checkbox' checked={this.state.isFav} onChange={this.changeFav} />
                 <h1>{this.props.name}</h1>
                 <img src={this.props.img} />
                 <p>{this.props.text}</p>
