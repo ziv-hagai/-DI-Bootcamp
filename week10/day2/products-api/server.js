@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const products_router = require('./routes/products')
+const users_router = require('./routes/users')
 
 dotenv.config();
 const app = express();
@@ -14,3 +15,4 @@ app.listen(process.env.PORT || 8000, () => {
 })
 
 app.use('/api/products', products_router)
+app.use('/api/users', users_router)

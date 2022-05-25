@@ -1,20 +1,4 @@
-const knex = require('knex');
-const dotenv = require('dotenv');
-const { application } = require('express');
-
-dotenv.config();
-
-const db = knex({
-    client: 'pg',
-    connection: {
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASS,
-        database: process.env.DB_NAME,
-        ssl: { rejectUnauthorized: false }
-    }
-})
+const db = require('../connections/heroku-pg');
 
 const getAllProducts = () => {
     return db('products')
@@ -28,15 +12,38 @@ const getProduct = (product_id) => {
         .where({ id: product_id })
 }
 
-
 const searchProduct = (query) => {
     return db('products')
         .select('id', 'name', 'price')
         .whereILike('name', `${query}%`)
 }
 
+const insertProduct = (product) => {
+    return db('products')
+        .insert(product)
+        .returning('*')
+}
+
+const deleteProduct = (id) => {
+    return db('products')
+        .where({ id: id })
+        .returning('*')
+        .delete('*')
+        .returning('*')
+}
+
+const updateProduct = (id, product) => {
+    return db('products')
+        .update(product)
+        .where({ id: id })
+        .returning('*')
+}
+
 module.exports = {
     getAllProducts,
     getProduct,
-    searchProduct
+    searchProduct,
+    insertProduct,
+    deleteProduct,
+    updateProduct
 }

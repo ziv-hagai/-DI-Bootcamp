@@ -1,50 +1,55 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { show } from '../redux/actions';
+import { showDay, showWeek } from '../redux/actions';
 
 class City extends React.Component {
     componentDidMount() {
-
+        // if (this.props.day) {
         console.log('mount');
-
-        this.props.show()
+        this.props.showDay()
+        this.props.showWeek()
+        // }
     }
-
-    componentDidUpdate() {
-        if (!this.props.city === {}) {
-            console.log('update');
-            this.props.show()
-        }
-    }
+    // componentDidUpdate() {
+    //     if (this.props.day) {
+    //         console.log('update');
+    //         this.props.showDay()
+    //     }
+    // }
 
     render() {
         console.log('render');
-        const current = this.props.current;
-        console.log(current.WeatherIcon);
-
-        return (
-            <div >
-                <h1>{this.props.city.LocalizedName}</h1>
-                <img src={`https://www.accuweather.com/images/weathericons/${current.WeatherIcon}.svg`} />
-                <p>{current.WeatherText}</p>
-                <p>{current.Temperature.Metric.Value} &#176;</p>
-            </div>
-        );
-
+        const day = this.props.day;
+        // console.log(day.WeatherIcon);
+        if (this.props.day) {
+            console.log(this.props.city.LocalizedName)
+            return (
+                <div >
+                    <h1>{this.props.city.LocalizedName}</h1>
+                    <img src={`https://www.accuweather.com/images/weathericons/${day.WeatherIcon}.svg`} />
+                    <p>{day.WeatherText}</p>
+                    <p>{day.Temperature.Metric.Value} &#176;</p>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div >loading...</div>
+            )
+        }
     }
 }
-
-
 const mapStateToProps = (state) => {
     return {
-        current: state.current,
+        day: state.day,
         city: state.city
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        show: () => dispatch(show()),
+        showDay: () => dispatch(showDay()),
+        showWeek: () => dispatch(showWeek()),
     }
 }
 
