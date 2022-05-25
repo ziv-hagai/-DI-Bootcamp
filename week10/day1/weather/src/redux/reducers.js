@@ -1,10 +1,9 @@
-import dayApi from './jsons/dayApi.json';
-import weekApi from './jsons/weekApi.json';
-import searchApi from './jsons/searchApi.json';
+
 
 const initState = {
     cities: [],
-    city: '',
+    cityName: '',
+    cittyKey: '',
     day: '',
     week: '',
     metric: true
@@ -13,16 +12,15 @@ const initState = {
 export const reducer = (state = initState, action = {}) => {
     switch (action.type) {
         case 'COMPLETE':
-            // const arr = payload
-            console.log(state.cities);
-            return { ...state, cities: [...searchApi] }
+            return { ...state, cities: action.payload }
         case 'DAY':
-            return { ...state, day: { ...dayApi }, city: { ...searchApi[0] } }
+            return { ...state, day: { ...action.payload }, cities: [] }
+        case 'METRIC':
+            return { ...state, metric: !state.metric }
         case 'WEEK':
-            return { ...state, week: { ...weekApi } }
+            return { ...state, week: { ...action.payload } }
         case 'CHOOSE':
-            console.log(action.payload);
-            return { ...state, city: { ...action.payload } }
+            return { ...state, cityName: action.payload.name, cityKey: action.payload.key }
         default:
             return { ...state }
     }

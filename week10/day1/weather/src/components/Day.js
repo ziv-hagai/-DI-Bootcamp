@@ -1,7 +1,5 @@
-
 const Day = (props) => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    // console.log(days[new Date(props.name).getDay()]);
     return (
         <div className='day'>
             <h1>{days[new Date(props.name).getDay()]}</h1>

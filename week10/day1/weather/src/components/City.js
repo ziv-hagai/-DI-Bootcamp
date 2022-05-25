@@ -1,56 +1,43 @@
 import React from "react";
-import { connect } from 'react-redux';
-import { showDay, showWeek } from '../redux/actions';
 
 class City extends React.Component {
-    componentDidMount() {
-        // if (this.props.day) {
-        console.log('mount');
-        this.props.showDay()
-        this.props.showWeek()
-        // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            isFav: this.props.isFav,
+        }
     }
-    // componentDidUpdate() {
-    //     if (this.props.day) {
-    //         console.log('update');
-    //         this.props.showDay()
-    //     }
-    // }
+    addToFav = () => {
+        this.setState({ isFav: !this.state.isFav })
+
+        if (this.state.isFav) {
+            localStorage.removeItem(this.props.name);
+        } else {
+            const favCity = {
+                isFav: true,
+                cityKey: this.props.cityKey,
+                city: this.props.name,
+                img: this.props.img,
+                text: this.props.text,
+                temp: this.props.temp
+            }
+            localStorage.setItem(this.props.name, JSON.stringify(favCity));
+        }
+    }
 
     render() {
-        console.log('render');
-        const day = this.props.day;
-        // console.log(day.WeatherIcon);
-        if (this.props.day) {
-            console.log(this.props.city.LocalizedName)
-            return (
-                <div >
-                    <h1>{this.props.city.LocalizedName}</h1>
-                    <img src={`https://www.accuweather.com/images/weathericons/${day.WeatherIcon}.svg`} />
-                    <p>{day.WeatherText}</p>
-                    <p>{day.Temperature.Metric.Value} &#176;</p>
-                </div>
-            );
-        }
-        else {
-            return (
-                <div >loading...</div>
-            )
-        }
-    }
-}
-const mapStateToProps = (state) => {
-    return {
-        day: state.day,
-        city: state.city
+        console.log(this.props);
+
+        return (
+            <div >
+                save<input type='checkbox' defaultChecked={this.props.isFav} onChange={this.addToFav} />
+                <h1>{this.props.name}</h1>
+                <img src={this.props.img} />
+                <p>{this.props.text}</p>
+                <p>{this.props.temp} &#176;</p>
+            </div>
+        );
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        showDay: () => dispatch(showDay()),
-        showWeek: () => dispatch(showWeek()),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(City)
+export default City
