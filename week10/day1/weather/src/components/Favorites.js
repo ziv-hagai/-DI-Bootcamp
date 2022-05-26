@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 
 class Favorites extends React.Component {
 
-    componentDidMount() {
-        console.log(this.props.local);
-    }
-
     render() {
         if (this.props.local.length) {
             return (
@@ -36,13 +32,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        // getLocal: (text) => dispatch(getLocal()),
-
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites)
+export default connect(mapStateToProps)(Favorites)
 
 

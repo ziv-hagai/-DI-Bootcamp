@@ -22,9 +22,9 @@ class Search extends React.Component {
     }
 
     render() {
-        // console.log('render');
         return (
             <div >
+
                 <input type='text' placeholder="search..." onChange={(e) => this.handleChange(e)} value={this.state.text}></input>
                 <button onClick={(e) => this.props.complete(this.state.text)}>Q</button>
                 <div name='list'>
@@ -37,7 +37,7 @@ class Search extends React.Component {
                     }
                 </div>
             </div>
-        );
+        )
     }
 }
 

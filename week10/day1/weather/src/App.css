@@ -1,3 +1,44 @@
+body {
+  margin: 0;
+}
+
+.App {
+  background: url(./bg.jpg) no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #4864ac !important;
+
+}
+
+#switch {
+  display: flex;
+  padding: 0 10px;
+  margin: 0 10px;
+
+}
+
+input {
+  background-color: #4864ac !important;
+
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  padding: 0 5px;
+
+}
+
+.links {
+  display: flex;
+  align-items: space-evenly;
+
+}
+
 img {
   width: 50px;
   height: 50px;

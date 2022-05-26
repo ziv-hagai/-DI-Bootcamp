@@ -11,7 +11,6 @@ class City extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.local);
         const found = this.props.local.find(i => i.cityKey == this.props.cityKey);
         if (found) {
             this.setState({ isFav: true })
@@ -34,7 +33,6 @@ class City extends React.Component {
     changeFav = () => {
         if (this.state.isFav) {
             const found = this.props.local.find(i => i.cityKey == this.props.cityKey);
-            console.log(found);
             const newFavs = this.props.local
             newFavs.pop(this.props.local[found])
             localStorage.setItem('favs', JSON.stringify(newFavs))

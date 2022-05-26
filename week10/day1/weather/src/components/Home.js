@@ -2,17 +2,13 @@ import City from './City';
 import Week from './Week';
 import React from "react";
 import { connect } from 'react-redux';
+
 class Home extends React.Component {
     render() {
-        // console.log(local)
-        // console.log(this.props.cityKey)
-        // console.log(local.includes(this.props.cityKey))
-        console.log(this.props.day)
         if (this.props.day[0]) {
             return (
                 <div >
                     <City
-                        // isFav={local.includes(this.props.cityKey)}
                         cityKey={this.props.cityKey}
                         name={this.props.cityName}
                         img={`https://www.accuweather.com/images/weathericons/${this.props.day[0].WeatherIcon}.svg`}
