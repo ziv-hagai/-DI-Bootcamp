@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { getLocal } from '../redux/actions';
+
 class City extends React.Component {
     constructor(props) {
         super(props);
@@ -6,19 +9,38 @@ class City extends React.Component {
             isFav: false,
         }
     }
-    componentDidMount() {
-        this.setState({ isFav: Object.keys(localStorage).includes(this.props.cityKey) })
-    }
 
-    componentDidUpdate() {
-        if (this.state.isFav !== Object.keys(localStorage).includes(this.props.cityKey)) {
-            this.setState({ isFav: Object.keys(localStorage).includes(this.props.cityKey) })
+    componentDidMount() {
+        console.log(this.props.local);
+        const found = this.props.local.find(i => i.cityKey == this.props.cityKey);
+        if (found) {
+            this.setState({ isFav: true })
+        } else {
+            this.setState({ isFav: false })
         }
     }
+
+    componentDidUpdate(prevPros) {
+        if (this.props.cityKey != prevPros.cityKey) {
+            const found = this.props.local.find(i => i.cityKey == this.props.cityKey);
+            if (found) {
+                this.setState({ isFav: true })
+            } else {
+                this.setState({ isFav: false })
+            }
+        }
+    }
+
     changeFav = () => {
         if (this.state.isFav) {
-            localStorage.removeItem(this.props.cityKey);
+            const found = this.props.local.find(i => i.cityKey == this.props.cityKey);
+            console.log(found);
+            const newFavs = this.props.local
+            newFavs.pop(this.props.local[found])
+            localStorage.setItem('favs', JSON.stringify(newFavs))
+            this.props.getLocal()
             this.setState({ isFav: false })
+
         } else {
             const favCity = {
                 isFav: true,
@@ -28,24 +50,40 @@ class City extends React.Component {
                 text: this.props.text,
                 temp: this.props.temp
             }
-            localStorage.setItem(this.props.cityKey, JSON.stringify(favCity));
+            const newFavs = this.props.local
+            newFavs.push(favCity)
+            localStorage.setItem('favs', JSON.stringify(newFavs));
             this.setState({ isFav: true })
         }
     }
 
+
     render() {
-        console.log(this.state.isFav,
-            Object.keys(localStorage).includes(this.props.cityKey))
         return (
             <div >
                 save<input type='checkbox' checked={this.state.isFav} onChange={this.changeFav} />
                 <h1>{this.props.name}</h1>
                 <img src={this.props.img} />
                 <p>{this.props.text}</p>
-                <p>{this.props.temp} &#176;</p>
+                <p>{this.props.metric ? this.props.temp : Math.round(this.props.temp * 1.8 + 32)} &#176;{this.props.metric ? 'C' : 'F'}</p>
             </div>
         );
     }
 }
 
-export default City
+const mapStateToProps = (state) => {
+    return {
+        local: state.local,
+        metric: state.metric
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getLocal: () => dispatch(getLocal()),
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(City)
+

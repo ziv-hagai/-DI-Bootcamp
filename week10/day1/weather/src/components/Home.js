@@ -7,17 +7,17 @@ class Home extends React.Component {
         // console.log(local)
         // console.log(this.props.cityKey)
         // console.log(local.includes(this.props.cityKey))
-
-        if (this.props.cityName) {
+        console.log(this.props.day)
+        if (this.props.day[0]) {
             return (
                 <div >
                     <City
                         // isFav={local.includes(this.props.cityKey)}
                         cityKey={this.props.cityKey}
                         name={this.props.cityName}
-                        img={`https://www.accuweather.com/images/weathericons/${this.props.day.WeatherIcon}.svg`}
-                        text={this.props.day.WeatherText}
-                        temp={this.props.day.Temperature.Metric.Value} />
+                        img={`https://www.accuweather.com/images/weathericons/${this.props.day[0].WeatherIcon}.svg`}
+                        text={this.props.day[0].WeatherText}
+                        temp={Math.round(this.props.day[0].Temperature.Metric.Value)} />
                     <div id='week'>
                         <Week />
                     </div>

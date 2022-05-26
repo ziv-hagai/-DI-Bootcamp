@@ -6,7 +6,8 @@ const initState = {
     cittyKey: '',
     day: '',
     week: '',
-    metric: true
+    metric: true,
+    local: []
 }
 
 export const reducer = (state = initState, action = {}) => {
@@ -14,12 +15,18 @@ export const reducer = (state = initState, action = {}) => {
         case 'COMPLETE':
             return { ...state, cities: action.payload }
         case 'DAY':
+            console.log(action.payload);
             return { ...state, day: { ...action.payload }, cities: [] }
         case 'METRIC':
             return { ...state, metric: !state.metric }
+        case 'LOCAL':
+            // console.log(action.payload);
+            return { ...state, local: action.payload }
         case 'WEEK':
             return { ...state, week: { ...action.payload } }
         case 'CHOOSE':
+            console.log(action.payload.name, action.payload.key);
+
             return { ...state, cityName: action.payload.name, cityKey: action.payload.key }
         default:
             return { ...state }

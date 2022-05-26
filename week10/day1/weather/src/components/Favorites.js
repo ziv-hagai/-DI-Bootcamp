@@ -2,27 +2,23 @@ import City from './City';
 import React from "react";
 import { connect } from 'react-redux';
 
-let favs = [],
-    keys = Object.keys(localStorage),
-    i = keys.length;
-while (i--) {
-    favs.push(JSON.parse(localStorage.getItem(keys[i])));
-}
-
-
 class Favorites extends React.Component {
 
+    componentDidMount() {
+        console.log(this.props.local);
+    }
+
     render() {
-        if (favs.length) {
+        if (this.props.local.length) {
             return (
-                favs.map((item, i) => {
+                this.props.local.map((item, i) => {
                     return (
 
                         <City key={i} cityKey={item.cityKey}
                             name={item.city}
                             img={item.img}
                             text={item.text}
-                            temp={item.temp} />
+                            temp={Math.round(item.temp)} />
                     );
                 })
             )
@@ -36,11 +32,17 @@ class Favorites extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        // day: state.day,
-        // cityName: state.cityName,
-        // cityKey: state.cityKey
+        local: state.local,
     }
 }
 
-export default connect(mapStateToProps)(Favorites)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // getLocal: (text) => dispatch(getLocal()),
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites)
+
 
