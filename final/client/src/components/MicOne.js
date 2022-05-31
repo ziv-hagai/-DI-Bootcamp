@@ -7,6 +7,8 @@ function MicOne() {
     const { transcript, resetTranscript } = useSpeechRecognition();
     const [isListening, setIsListening] = useState(false);
     const microphoneRef = useRef(null);
+    const [notes, setNotes] = useState([]);
+
     // if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     //     return (
     //         <div className="mircophone-container">
@@ -30,11 +32,11 @@ function MicOne() {
         stopHandle();
         resetTranscript();
     };
-    console.log(transcript);
+    // console.log(transcript);
 
     const add = (e) => {
         e.preventDefault()
-        fetch(`/add`, {
+        fetch(`/notes/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,9 +44,9 @@ function MicOne() {
             body: JSON.stringify({ transcript })
         })
             .then(res => res.json())
-            // .then(data => {
-            //     setProduct(data);
-            // })
+            .then(data => {
+                setNotes(data);
+            })
             .catch(err => console.log(err));
     }
 

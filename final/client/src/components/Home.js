@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import React, { Component } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
 import MicOne from './MicOne';
 
 const Home = (props) => {
 
+    const navigate = useNavigate()
+
     const [notes, setNotes] = useState([]);
     const [searchText, setSearchText] = useState([]);
-    const [title, setTitle] = useState([]);
-    const [text, setText] = useState([]);
+    // const [title, setTitle] = useState([]);
+    // const [text, setText] = useState([]);
 
     useEffect(() => {
         fetch('/notes/all')
@@ -38,25 +40,29 @@ const Home = (props) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title, text })
+            body: JSON.stringify({ title: '', text: '' })
         })
             .then(res => res.json())
-            .then(data => setNotes(data))
+            .then(data => {
+                notes.push(data[0])
+                setNotes([...notes])
+                console.log(notes[notes.length - 1]);
+
+                navigate(`/${notes[notes.length - 1].id}`)
+
+            })
             .catch(err => console.log(err));
     }
 
     return (
         <div>
-
-
             <div id="up">
                 <div id='search'>
                     <input type='text' onChange={(e) => setSearchText(e.target.value)} />
                     <button onClick={search}>Search</button>
                 </div>
                 <MicOne />
-
-                <button id='plus'>+</button>
+                <button id='plus' onClick={add}>+</button>
                 {/* <form onSubmit={add}>
                     title:<input type='text' onChange={(e) => setTitle(e.target.value)} /><br />
                     text:<input type='text' onChange={(e) => setText(e.target.value)} />
@@ -67,12 +73,15 @@ const Home = (props) => {
                 {
                     notes.map(item => {
                         return (
-                            <div key={item.id} className='card tc grow bg-whitesmoke br3 pa3 ma2 dib bw2 shadow-5'>
-                                <h3 >{item.title}</h3>
-                                <p>{item.text}</p>
-                                <h6>{item.date.slice(0, 10)}</h6>
-                                {/* <button><Link to={`/${item.id}`}>edit</Link></button> */}
-                            </div>
+                            <Link to={`/${item.id}`} key={item.id} className='card tc grow bg-whitesmoke br3 pa3 ma2 dib bw2 shadow-5'>
+
+                                <div >
+                                    <h3 >{item.title}</h3>
+                                    <p>{item.text}</p>
+                                    <h6>{item.date.slice(0, 10)}</h6>
+                                    {/* <button><Link to={`/${item.id}`}>edit</Link></button> */}
+                                </div>
+                            </Link>
                         )
                     })
                 }

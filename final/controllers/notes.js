@@ -10,7 +10,6 @@ const _getAllNotes = (req, res) => {
         })
 }
 
-
 const _getNote = (req, res) => {
     getNote(req.params.id)
         .then(data => {
