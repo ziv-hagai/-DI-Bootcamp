@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import React from 'react';
+import { Context } from '../App';
 
 const Note = () => {
     const [note, setNote] = useState([]);
@@ -8,10 +9,9 @@ const Note = () => {
     const [title, setTitle] = useState([]);
     const [text, setText] = useState([]);
     const navigate = useNavigate()
-    const [notes, setNotes] = useState([]);
+    const { notes, setNotes } = useContext(Context);
     const [edit, setEdit] = useState(false);
-    // console.log(note);
-    // useContext
+
     useEffect(() => {
         fetch(`/notes/n/${params.id}`)
             .then(res => res.json())

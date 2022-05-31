@@ -20,8 +20,8 @@ const Home = () => {
             .catch(err => console.log(err));
     }, []);
 
-    const search = () => {
-        fetch(`/notes/search?q=${searchText}`)
+    const search = (text) => {
+        fetch(`/notes/search?q=${text}`)
             .then(res => res.json())
             .then(data => {
                 // const arr = data.sort()
@@ -54,8 +54,10 @@ const Home = () => {
         <div>
             <div id="up">
                 <div id='search'>
-                    <input type='text' onChange={(e) => setSearchText(e.target.value)} />
-                    <button onClick={search}>Search</button>
+                    {/* <input type='text' onChange={(e) => setSearchText(e.target.value)} />
+                    <button onClick={search}>Search</button> */}
+                    <input type='text' onChange={(e) => search(e.target.value)} />
+                    <button >Q</button>
                 </div>
                 <MicOne />
                 <button id='plus' onClick={add}>+</button>
