@@ -1,17 +1,17 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import React from 'react';
-import { Context } from '../App';
 
 const Note = () => {
-    const { notes, setNotes } = useContext(Context);
     const [note, setNote] = useState([]);
     const params = useParams();
     const [title, setTitle] = useState([]);
     const [text, setText] = useState([]);
     const navigate = useNavigate()
+    const [notes, setNotes] = useState([]);
     const [edit, setEdit] = useState(false);
-
+    // console.log(note);
+    // useContext
     useEffect(() => {
         fetch(`/notes/n/${params.id}`)
             .then(res => res.json())
@@ -20,8 +20,8 @@ const Note = () => {
                 setNote(data)
                 setTitle(data[0].title);
                 setText(data[0].text)
-                console.log(data[data.length - 1].id, title);
-                if (data[0].text === '' && data[0].title === `Note ${data[data.length - 1].id}`) {
+                console.log(data);
+                if (data[0].title === '' && data[0].text === '') {
                     setEdit(true)
                 }
             })
@@ -78,7 +78,13 @@ const Note = () => {
     }
     return (
         <div>
-
+            {/* <div>
+                <form onSubmit={update}>
+                    title:<input type='text' onChange={(e) => setTitle(e.target.value)} value={title} /><br />
+                    text:<input type='text' onChange={(e) => setText(e.target.value)} value={text} />
+                    <input type='submit' value='update' />
+                </form>
+            </div> */}
             {
                 note.map(item => {
                     return (

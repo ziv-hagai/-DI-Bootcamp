@@ -1,19 +1,22 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import React from 'react';
 import MicOne from './MicOne';
-import { Context } from '../App';
 
-const Home = () => {
-    const { notes, setNotes } = useContext(Context);
+const Home = (props) => {
+
     const navigate = useNavigate()
 
+    const [notes, setNotes] = useState([]);
     const [searchText, setSearchText] = useState([]);
+    // const [title, setTitle] = useState([]);
+    // const [text, setText] = useState([]);
 
     useEffect(() => {
         fetch('/notes/all')
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 // const arr = data.sort()
                 setNotes(data)
             })
@@ -32,20 +35,21 @@ const Home = () => {
 
     const add = (e) => {
         e.preventDefault()
-        console.log(notes[notes.length - 1].id);
         fetch(`/notes/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title: `Note ${notes[notes.length - 1].id + 1}`, text: '' })
+            body: JSON.stringify({ title: '', text: '' })
         })
             .then(res => res.json())
             .then(data => {
                 notes.push(data[0])
                 setNotes([...notes])
                 console.log(notes[notes.length - 1]);
+
                 navigate(`/${notes[notes.length - 1].id}`)
+
             })
             .catch(err => console.log(err));
     }
@@ -59,6 +63,11 @@ const Home = () => {
                 </div>
                 <MicOne />
                 <button id='plus' onClick={add}>+</button>
+                {/* <form onSubmit={add}>
+                    title:<input type='text' onChange={(e) => setTitle(e.target.value)} /><br />
+                    text:<input type='text' onChange={(e) => setText(e.target.value)} />
+                    <input type='submit' value='add' />
+                </form> */}
             </div>
             <div id="board">
                 {
@@ -70,6 +79,7 @@ const Home = () => {
                                     <h3 >{item.title}</h3>
                                     <p>{item.text}</p>
                                     <h6>{item.date.slice(0, 10)}</h6>
+                                    {/* <button><Link to={`/${item.id}`}>edit</Link></button> */}
                                 </div>
                             </Link>
                         )
