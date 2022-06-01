@@ -4,13 +4,12 @@ import React from 'react';
 import { Context } from '../App';
 
 const Note = () => {
-    const { notes, setNotes } = useContext(Context);
+    const { notes, setNotes, edit, setEdit } = useContext(Context);
     const [note, setNote] = useState([]);
     const params = useParams();
     const [title, setTitle] = useState([]);
     const [text, setText] = useState([]);
     const navigate = useNavigate()
-    const [edit, setEdit] = useState(false);
 
     useEffect(() => {
         fetch(`/notes/n/${params.id}`)
@@ -20,10 +19,10 @@ const Note = () => {
                 setNote(data)
                 setTitle(data[0].title);
                 setText(data[0].text)
-                console.log(data[data.length - 1].id, title);
-                if (data[0].text === '' && data[0].title === `Note ${data[data.length - 1].id}`) {
-                    setEdit(true)
-                }
+                // console.log(data[data.length - 1].id, title);
+                // if (data[0].text === '' && data[0].title === `Note ${data[data.length - 1].id}`) {
+                // setEdit(true)
+                // }
             })
             .catch(err => console.log(err));
     }, []);
@@ -46,21 +45,6 @@ const Note = () => {
             .catch(err => console.log(err));
     }
 
-    const add = (e) => {
-        e.preventDefault()
-        fetch(`/notes/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title, text })
-        })
-            .then(res => res.json())
-            .then(data => setNotes(data))
-            .catch(err => console.log(err));
-
-    }
-
     const del = (e) => {
         e.preventDefault()
         fetch(`/notes/${params.id}`, {
@@ -71,11 +55,13 @@ const Note = () => {
                 navigate('/')
             })
             .catch(err => console.log(err));
+        // setNote(notes)
     }
 
     const editMode = () => {
-        setEdit(!edit)
+        setEdit(true)
     }
+
     return (
         <div>
 

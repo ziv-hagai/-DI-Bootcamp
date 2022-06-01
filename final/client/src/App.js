@@ -11,9 +11,11 @@ export const Context = createContext();
 // createContext.provider
 function App() {
   const [notes, setNotes] = useState([]);
+  const [isNew, setIsNew] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   return (
-    <Context.Provider value={{ notes, setNotes }}>
+    <Context.Provider value={{ notes, setNotes, isNew, setIsNew, edit, setEdit }}>
 
       <div className="App">
         {/* <header className="App-header"> */}
