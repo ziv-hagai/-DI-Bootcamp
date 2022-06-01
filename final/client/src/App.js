@@ -5,6 +5,8 @@ import Note from './components/Note';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'tachyons';
 import { useState, createContext } from 'react';
+// import { DndProvider } from 'react-dnd'
+// import { HTML5Backend } from 'react-dnd-html5-backend'
 
 export const Context = createContext();
 
@@ -17,17 +19,19 @@ function App() {
   return (
     <Context.Provider value={{ notes, setNotes, isNew, setIsNew, edit, setEdit }}>
 
-      <div className="App">
-        {/* <header className="App-header"> */}
+      {/* <div className="App"> */}
+      <header className="App-header">
         <h1 className='title'>notesbook</h1>
+        {/* <DndProvider backend={HTML5Backend}> */}
         <BrowserRouter className="App">
           <Routes className="App-header">
             <Route path='/' element={<Home />} />
             <Route path='/:id' element={<Note />} />
           </Routes>
         </BrowserRouter>
-        {/* </header> */}
-      </div>
+        {/* </DndProvider> */}
+      </header>
+      {/* </div> */}
     </Context.Provider >
 
   );
