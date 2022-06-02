@@ -15,7 +15,7 @@ const Home = () => {
             .then(res => res.json())
             .then(data => {
                 isNew && data.reverse()
-                // console.log(data.reverse());
+                console.log(data);
                 // const arr = data.sort()
                 setNotes(data)
                 setEdit(false)
@@ -25,8 +25,6 @@ const Home = () => {
     }, []);
 
     const handleDrop = (droppedItem) => {
-        console.log('hd');
-
         if (!droppedItem.destination) return;
         var updatedList = [...notes];
         const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
@@ -56,7 +54,7 @@ const Home = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title: `New Note`, text: '' })
+            body: JSON.stringify({ title: `New Note`, text: '', color: 'white', index: notes.length })
         })
             .then(res => res.json())
             .then(data => {
@@ -69,12 +67,10 @@ const Home = () => {
     }
 
     return (
-
         <div>
-            {/* {console.log(itemList)} */}
+            {console.log(notes)}
             <div id="up">
                 <div id='search'>
-                    {/* <input type='text' onChange={(e) => setSearchText(e.target.value)} />*/}
                     <button onClick={reverse}>{isNew ? 'old' : 'new'}</button>
                     <input type='text' onChange={(e) => search(e.target.value)} />Q
                 </div>
@@ -90,8 +86,8 @@ const Home = () => {
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                             >
-                                {notes.map((item, index) => (
-                                    <Draggable key={`${item.id}`} draggableId={`${item.id}`} index={index} >
+                                {notes.map((item, i) => (
+                                    <Draggable key={`${item.id}`} draggableId={`${item.id}`} index={i} >
                                         {(provided) => (
                                             <div
                                                 className="item-container"
@@ -99,13 +95,14 @@ const Home = () => {
                                                 {...provided.dragHandleProps}
                                                 {...provided.draggableProps}
                                             >
-                                                <Link to={`/${item.id}`} className='card tc grow bg-whitesmoke br3 pa3 ma2 dib bw2 shadow-5'>
+                                                <Link style={{ backgroundColor: item.color }} to={`/${item.id}`} className='card tc grow bg-whitesmoke br3 pa3 ma2 dib bw2 shadow-5'>
                                                     <div >
                                                         <h3 >{item.title}</h3>
                                                         <p>{item.text}</p>
                                                         <h6>{item.date.slice(0, 10)}</h6>
                                                     </div>
-                                                </Link>                                        </div>
+                                                </Link>
+                                            </div>
                                         )}
                                     </Draggable>
                                 ))}
@@ -114,20 +111,6 @@ const Home = () => {
                         )}
                     </Droppable>
                 </DragDropContext>
-
-                {/* {
-                    notes.map(item => {
-                        return (
-                            <Link to={`/${item.id}`} key={item.id} className='card tc grow bg-whitesmoke br3 pa3 ma2 dib bw2 shadow-5'>
-                                <div >
-                                    <h3 >{item.title}</h3>
-                                    <p>{item.text}</p>
-                                    <h6>{item.date.slice(0, 10)}</h6>
-                                </div>
-                            </Link>
-                        )
-                    })
-                } */}
             </div>
         </div>
     )

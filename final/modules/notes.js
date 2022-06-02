@@ -1,23 +1,21 @@
 const db = require('../connections/heroku-pg');
 
 const getAllNotes = () => {
-    // console.log('getAllNotes');
     return db('notes')
-        .select('id', 'title', 'text', 'date')
+        .select('id', 'title', 'text', 'date', 'index', 'color')
         .orderBy('date')
         .returning('*')
-
 }
 
 const getNote = (id) => {
     return db('notes')
-        .select('id', 'title', 'text', 'date')
+        .select('id', 'title', 'text', 'date', 'index', 'color')
         .where({ id: id })
 }
 
 const searchNote = (query) => {
     return db('notes')
-        .select('id', 'title', 'text', 'date')
+        .select('id', 'title', 'text', 'date', 'index', 'color')
         .whereILike('title', `%${query}%`)
         .orWhereILike('text', `%${query}%`)
 }

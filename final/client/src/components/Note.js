@@ -2,6 +2,10 @@ import { useState, useEffect, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import React from 'react';
 import { Context } from '../App';
+// import React from "react";
+// import "./styles.css";
+import { EmailShareButton, WhatsappShareButton } from "react-share";
+import { EmailIcon, WhatsappIcon } from "react-share";
 
 const Note = () => {
     const { notes, setNotes, edit, setEdit } = useContext(Context);
@@ -9,6 +13,7 @@ const Note = () => {
     const params = useParams();
     const [title, setTitle] = useState([]);
     const [text, setText] = useState([]);
+    const [color, setColor] = useState([]);
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -19,13 +24,15 @@ const Note = () => {
                 setNote(data)
                 setTitle(data[0].title);
                 setText(data[0].text)
-                // console.log(data[data.length - 1].id, title);
-                // if (data[0].text === '' && data[0].title === `Note ${data[data.length - 1].id}`) {
-                // setEdit(true)
-                // }
+                setColor(data[0].color)
             })
             .catch(err => console.log(err));
     }, []);
+
+    const handleChange = (e) => {
+        console.log(e.target.value);
+        setColor(e.target.value)
+    }
 
     const update = (e) => {
         setEdit(false)
@@ -35,7 +42,7 @@ const Note = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title, text })
+            body: JSON.stringify({ title, text, color })
         })
             .then(res => res.json())
             .then(data => {
@@ -69,20 +76,56 @@ const Note = () => {
                 note.map(item => {
                     return (
                         edit ?
-                            <div key={item.id} id='editable'>
+                            <div key={item.id} id='editable' style={{ backgroundColor: color }}>
                                 <form onSubmit={update}>
                                     <input type='text' onChange={(e) => setTitle(e.target.value)} value={title} />
                                     <textarea type='text' onChange={(e) => setText(e.target.value)} value={text} />
-                                    <input type='submit' value='done' />
+                                    <label className="white">
+                                        <input type="radio" name="color" value="white" onChange={handleChange} />
+                                        <div className="button"><span></span></div>
+                                    </label>
+                                    <label className="lightcoral">
+                                        <input type="radio" name="color" value="lightcoral" onChange={handleChange} />
+                                        <div className="button"><span></span></div>
+                                    </label>
+                                    <label className="lightblue">
+                                        <input type="radio" name="color" value="lightblue" onChange={handleChange} />
+                                        <div className="button"><span></span></div>
+                                    </label>
+                                    <label className="yellow">
+                                        <input type="radio" name="color" value="yellow" onChange={handleChange} />
+                                        <div className="button"><span></span></div>
+                                    </label>
+
+                                    <input name='radio' type='submit' value='done' />
                                 </form>
                             </div>
                             :
-                            <div key={item.id}>
-                                <h2>{edit ? 'edit' : item.title}</h2>
+                            <div key={item.id} style={{ backgroundColor: item.color }}>
+                                <h2>{item.title}</h2>
                                 <p>{item.text}</p>
                                 <Link to={`/`}> <button>back</button></Link>
                                 <button onClick={editMode}>edit</button>
                                 <button onClick={del}>Delete</button>
+                                <div className="share">
+                                    <EmailShareButton
+                                        url={""}
+                                        subject={item.title}
+                                        body={item.text + "\n\n(sent from 'notesbook')"}
+                                        className="Demo__some-network__share-button"
+                                    >
+                                        <EmailIcon size={32} round />
+                                    </EmailShareButton>
+                                    <br />
+                                    <WhatsappShareButton
+                                        title={`*${item.title}*\n${item.text}`}
+                                        body={item.text + "\n\n(sent from 'notesbook')"}
+
+                                        url={"\n\n(sent from 'notesbook')"}
+                                    >
+                                        <WhatsappIcon size={32} round />
+                                    </WhatsappShareButton>
+                                </div>
                             </div>
                     )
 
@@ -95,4 +138,3 @@ const Note = () => {
 
 export default Note
 
-{/* <div contenteditable="true">can be edited</div> */ }

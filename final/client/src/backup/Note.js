@@ -2,15 +2,18 @@ import { useState, useEffect, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import React from 'react';
 import { Context } from '../App';
+// import React from "react";
+// import "./styles.css";
+import { EmailShareButton, WhatsappShareButton } from "react-share";
+import { EmailIcon, WhatsappIcon } from "react-share";
 
 const Note = () => {
+    const { notes, setNotes, edit, setEdit } = useContext(Context);
     const [note, setNote] = useState([]);
     const params = useParams();
     const [title, setTitle] = useState([]);
     const [text, setText] = useState([]);
     const navigate = useNavigate()
-    const { notes, setNotes } = useContext(Context);
-    const [edit, setEdit] = useState(false);
 
     useEffect(() => {
         fetch(`/notes/n/${params.id}`)
@@ -20,10 +23,6 @@ const Note = () => {
                 setNote(data)
                 setTitle(data[0].title);
                 setText(data[0].text)
-                console.log(data);
-                if (data[0].title === '' && data[0].text === '') {
-                    setEdit(true)
-                }
             })
             .catch(err => console.log(err));
     }, []);
@@ -46,21 +45,6 @@ const Note = () => {
             .catch(err => console.log(err));
     }
 
-    const add = (e) => {
-        e.preventDefault()
-        fetch(`/notes/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title, text })
-        })
-            .then(res => res.json())
-            .then(data => setNotes(data))
-            .catch(err => console.log(err));
-
-    }
-
     const del = (e) => {
         e.preventDefault()
         fetch(`/notes/${params.id}`, {
@@ -71,20 +55,16 @@ const Note = () => {
                 navigate('/')
             })
             .catch(err => console.log(err));
+        // setNote(notes)
     }
 
     const editMode = () => {
-        setEdit(!edit)
+        setEdit(true)
     }
+
     return (
         <div>
-            {/* <div>
-                <form onSubmit={update}>
-                    title:<input type='text' onChange={(e) => setTitle(e.target.value)} value={title} /><br />
-                    text:<input type='text' onChange={(e) => setText(e.target.value)} value={text} />
-                    <input type='submit' value='update' />
-                </form>
-            </div> */}
+
             {
                 note.map(item => {
                     return (
@@ -103,6 +83,25 @@ const Note = () => {
                                 <Link to={`/`}> <button>back</button></Link>
                                 <button onClick={editMode}>edit</button>
                                 <button onClick={del}>Delete</button>
+                                <div className="share">
+                                    <EmailShareButton
+                                        url={""}
+                                        subject={item.title}
+                                        body={item.text + "\n\n(sent from 'notesbook')"}
+                                        className="Demo__some-network__share-button"
+                                    >
+                                        <EmailIcon size={32} round />
+                                    </EmailShareButton>
+                                    <br />
+                                    <WhatsappShareButton
+                                        title={`*${item.title}*\n${item.text}`}
+                                        body={item.text + "\n\n(sent from 'notesbook')"}
+
+                                        url={"\n\n(sent from 'notesbook')"}
+                                    >
+                                        <WhatsappIcon size={32} round />
+                                    </WhatsappShareButton>
+                                </div>
                             </div>
                     )
 
@@ -115,4 +114,3 @@ const Note = () => {
 
 export default Note
 
-{/* <div contenteditable="true">can be edited</div> */ }
