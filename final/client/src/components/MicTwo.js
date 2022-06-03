@@ -27,14 +27,14 @@ const MicTwo = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title: `Voice Note`, text: transcript })
+            body: JSON.stringify({ title: `Voice Note`, text: transcript, color: 'white', index: notes.length })
         })
             .then(res => res.json())
             .then(data => {
-                isNew ? notes.unshift(data[0]) : notes.push(data[0]);
+                // isNew ? notes.unshift(data[0]) : notes.push(data[0]);
+                notes.unshift(data[0])
                 setNotes([...notes])
                 resetTranscript();
-                // setIsListening(false);
             })
             .catch(err => console.log(err));
     }

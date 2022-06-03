@@ -3,7 +3,7 @@ const db = require('../connections/heroku-pg');
 const getAllNotes = () => {
     return db('notes')
         .select('id', 'title', 'text', 'date', 'index', 'color')
-        .orderBy('date')
+        .orderBy('index', 'desc')
         .returning('*')
 }
 

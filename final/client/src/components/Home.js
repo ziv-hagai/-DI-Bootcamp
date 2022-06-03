@@ -9,17 +9,12 @@ const Home = () => {
     const { notes, setNotes, isNew, setIsNew, edit, setEdit } = useContext(Context);
     const navigate = useNavigate()
 
-    // const [searchText, setSearchText] = useState([]);
     useEffect(() => {
         fetch('/notes/all')
             .then(res => res.json())
             .then(data => {
-                isNew && data.reverse()
-                console.log(data);
-                // const arr = data.sort()
                 setNotes(data)
                 setEdit(false)
-                // setItemList([...data])
             })
             .catch(err => console.log(err));
     }, []);
@@ -30,10 +25,46 @@ const Home = () => {
         const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
         updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
         setNotes(updatedList);
+        updatedList.forEach((item, i) => {
+            fetch(`/notes/${item.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ index: updatedList.length - i })
+            })
+                .then(res => res.json())
+                .catch(err => console.log(err));
+        })
     };
 
+    const reset = () => {
+        fetch('/notes/all')
+            .then(res => res.json())
+            .then(data => {
+                setNotes(data)
+                setEdit(false)
+            })
+            .catch(err => console.log(err));
+    }
+
     const reverse = () => {
-        setNotes(notes.reverse())
+        isNew ?
+            notes.sort(function (a, b) {
+                const keyA = new Date(a.date),
+                    keyB = new Date(b.date);
+                if (keyA < keyB) return -1;
+                if (keyA > keyB) return 1;
+                return 0;
+            })
+            :
+            notes.sort(function (a, b) {
+                const keyA = new Date(a.date),
+                    keyB = new Date(b.date);
+                if (keyA > keyB) return -1;
+                if (keyA < keyB) return 1;
+                return 0;
+            })
         setIsNew(!isNew)
     }
 
@@ -41,7 +72,6 @@ const Home = () => {
         fetch(`/notes/search?q=${text}`)
             .then(res => res.json())
             .then(data => {
-                // const arr = data.sort()
                 setNotes(data)
             })
             .catch(err => console.log(err));
@@ -68,10 +98,10 @@ const Home = () => {
 
     return (
         <div>
-            {console.log(notes)}
             <div id="up">
                 <div id='search'>
                     <button onClick={reverse}>{isNew ? 'old' : 'new'}</button>
+                    <button onClick={reset}>reset</button>
                     <input type='text' onChange={(e) => search(e.target.value)} />Q
                 </div>
                 <MicTwo />
@@ -99,7 +129,7 @@ const Home = () => {
                                                     <div >
                                                         <h3 >{item.title}</h3>
                                                         <p>{item.text}</p>
-                                                        <h6>{item.date.slice(0, 10)}</h6>
+                                                        <h6>{Date(item.date).slice(4, 15).replace(' 0', ' ')}</h6>
                                                     </div>
                                                 </Link>
                                             </div>
