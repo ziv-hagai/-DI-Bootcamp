@@ -3,6 +3,8 @@ import React from 'react';
 import { useRef, useState, useContext } from "react";
 import { Context } from '../App';
 
+import { AiTwotoneAudio, AiOutlineCheck } from "react-icons/ai";
+
 const MicTwo = () => {
     const { notes, setNotes, isNew, setIsNew } = useContext(Context);
 
@@ -31,7 +33,6 @@ const MicTwo = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // isNew ? notes.unshift(data[0]) : notes.push(data[0]);
                 notes.unshift(data[0])
                 setNotes([...notes])
                 resetTranscript();
@@ -42,12 +43,10 @@ const MicTwo = () => {
     return (
         <div>
             {listening ?
-                <button onClick={add}>Stop</button>
+                <a onClick={add}><AiOutlineCheck /></a>
                 :
-                <button onClick={SpeechRecognition.startListening}>Start</button>
+                <a onClick={SpeechRecognition.startListening}><AiTwotoneAudio /></a>
             }
-            {/* <button onClick={resetTranscript}>Reset</button>
-             <p>{transcript}</p> */}
         </div>
     );
 };

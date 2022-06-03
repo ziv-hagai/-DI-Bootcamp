@@ -5,6 +5,8 @@ import MicTwo from './MicTwo';
 import { Context } from '../App';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
+import { AiFillCaretDown, AiFillCaretUp, AiOutlineClockCircle, AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
+
 const Home = () => {
     const { notes, setNotes, isNew, setIsNew, edit, setEdit } = useContext(Context);
     const navigate = useNavigate()
@@ -97,15 +99,18 @@ const Home = () => {
     }
 
     return (
-        <div>
-            <div id="up">
-                <div id='search'>
-                    <button onClick={reverse}>{isNew ? 'old' : 'new'}</button>
-                    <button onClick={reset}>reset</button>
-                    <input type='text' onChange={(e) => search(e.target.value)} />Q
+        <div >
+            <div id="up" >
+                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={reverse}>{isNew ? <AiFillCaretDown /> : <AiFillCaretUp />}</a>
+                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={reset}>
+                    <AiOutlineClockCircle />
+                </a>
+                <div id='search' className="f6 br-pill ph3 pv2 mb2 dib black black bg-light-gray">
+                    <input type='text' onChange={(e) => search(e.target.value)} />
+                    <AiOutlineSearch />
                 </div>
-                <MicTwo />
-                <button id='plus' onClick={add}>+</button>
+                <div className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" ><MicTwo /></div>
+                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={add}><AiOutlinePlus /></a>
             </div>
             <div id="board">
                 <DragDropContext onDragEnd={handleDrop}>
@@ -142,7 +147,7 @@ const Home = () => {
                     </Droppable>
                 </DragDropContext>
             </div>
-        </div>
+        </div >
     )
 }
 

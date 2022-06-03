@@ -6,6 +6,7 @@ import { Context } from '../App';
 // import "./styles.css";
 import { EmailShareButton, WhatsappShareButton } from "react-share";
 import { EmailIcon, WhatsappIcon } from "react-share";
+import { AiFillEdit, AiFillDelete, AiFillHome, AiOutlineCheck } from "react-icons/ai";
 
 const Note = () => {
     const { notes, setNotes, edit, setEdit } = useContext(Context);
@@ -97,22 +98,23 @@ const Note = () => {
                                         <div className="button"><span></span></div>
                                     </label>
 
-                                    <input name='radio' type='submit' value='done' />
+                                    <button className="submit f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" type='submit' ><AiOutlineCheck /></button>
+
                                 </form>
                             </div>
                             :
                             <div key={item.id} style={{ backgroundColor: item.color }}>
                                 <h2>{item.title}</h2>
                                 <p>{item.text}</p>
-                                <Link to={`/`}> <button>back</button></Link>
-                                <button onClick={editMode}>edit</button>
-                                <button onClick={del}>Delete</button>
+                                <Link to={`/`}> <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray"><AiFillHome /></a></Link>
+                                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={editMode}><AiFillEdit /></a>
+                                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={del}><AiFillDelete /></a>
                                 <div className="share">
                                     <EmailShareButton
                                         url={""}
                                         subject={item.title}
                                         body={item.text + "\n\n(sent from 'notesbook')"}
-                                        className="Demo__some-network__share-button"
+                                        className="mail"
                                     >
                                         <EmailIcon size={32} round />
                                     </EmailShareButton>
@@ -122,6 +124,8 @@ const Note = () => {
                                         body={item.text + "\n\n(sent from 'notesbook')"}
 
                                         url={"\n\n(sent from 'notesbook')"}
+                                        className="wa"
+
                                     >
                                         <WhatsappIcon size={32} round />
                                     </WhatsappShareButton>
