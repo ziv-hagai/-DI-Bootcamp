@@ -5,21 +5,18 @@ import MicTwo from './MicTwo';
 import { Context } from '../App';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
+import { AiFillCaretDown, AiFillCaretUp, AiOutlineClockCircle, AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
+
 const Home = () => {
     const { notes, setNotes, isNew, setIsNew, edit, setEdit } = useContext(Context);
     const navigate = useNavigate()
 
-    // const [searchText, setSearchText] = useState([]);
     useEffect(() => {
         fetch('/notes/all')
             .then(res => res.json())
             .then(data => {
-                isNew && data.reverse()
-                // console.log(data.reverse());
-                // const arr = data.sort()
                 setNotes(data)
                 setEdit(false)
-                // setItemList([...data])
             })
             .catch(err => console.log(err));
     }, []);
@@ -30,10 +27,46 @@ const Home = () => {
         const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
         updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
         setNotes(updatedList);
+        updatedList.forEach((item, i) => {
+            fetch(`/notes/${item.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ index: updatedList.length - i })
+            })
+                .then(res => res.json())
+                .catch(err => console.log(err));
+        })
     };
 
+    const reset = () => {
+        fetch('/notes/all')
+            .then(res => res.json())
+            .then(data => {
+                setNotes(data)
+                setEdit(false)
+            })
+            .catch(err => console.log(err));
+    }
+
     const reverse = () => {
-        setNotes(notes.reverse())
+        isNew ?
+            notes.sort(function (a, b) {
+                const keyA = new Date(a.date),
+                    keyB = new Date(b.date);
+                if (keyA < keyB) return -1;
+                if (keyA > keyB) return 1;
+                return 0;
+            })
+            :
+            notes.sort(function (a, b) {
+                const keyA = new Date(a.date),
+                    keyB = new Date(b.date);
+                if (keyA > keyB) return -1;
+                if (keyA < keyB) return 1;
+                return 0;
+            })
         setIsNew(!isNew)
     }
 
@@ -41,7 +74,6 @@ const Home = () => {
         fetch(`/notes/search?q=${text}`)
             .then(res => res.json())
             .then(data => {
-                // const arr = data.sort()
                 setNotes(data)
             })
             .catch(err => console.log(err));
@@ -54,7 +86,7 @@ const Home = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title: `New Note`, text: '' })
+            body: JSON.stringify({ title: `New Note`, text: '', color: 'white', index: notes.length })
         })
             .then(res => res.json())
             .then(data => {
@@ -67,15 +99,18 @@ const Home = () => {
     }
 
     return (
-        <div>
-            {console.log(notes)}
-            <div id="up">
-                <div id='search'>
-                    <button onClick={reverse}>{isNew ? 'old' : 'new'}</button>
-                    <input type='text' onChange={(e) => search(e.target.value)} />Q
+        <div >
+            <div id="up" >
+                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={reverse}>{isNew ? <AiFillCaretDown /> : <AiFillCaretUp />}</a>
+                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={reset}>
+                    <AiOutlineClockCircle />
+                </a>
+                <div id='search' className="f6 br-pill ph3 pv2 mb2 dib black black bg-light-gray">
+                    <input type='text' onChange={(e) => search(e.target.value)} />
+                    <AiOutlineSearch />
                 </div>
-                <MicTwo />
-                <button id='plus' onClick={add}>+</button>
+                <div className="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-black" ><MicTwo /></div>
+                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-black" onClick={add}><AiOutlinePlus /></a>
             </div>
             <div id="board">
                 <DragDropContext onDragEnd={handleDrop}>
@@ -86,8 +121,8 @@ const Home = () => {
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                             >
-                                {notes.map((item, index) => (
-                                    <Draggable key={`${item.id}`} draggableId={`${item.id}`} index={index} >
+                                {notes.map((item, i) => (
+                                    <Draggable key={`${item.id}`} draggableId={`${item.id}`} index={i} >
                                         {(provided) => (
                                             <div
                                                 className="item-container"
@@ -95,11 +130,13 @@ const Home = () => {
                                                 {...provided.dragHandleProps}
                                                 {...provided.draggableProps}
                                             >
-                                                <Link to={`/${item.id}`} className='card tc grow bg-whitesmoke br3 pa3 ma2 dib bw2 shadow-5'>
+                                                <Link style={{ backgroundColor: item.color }} to={`/${item.id}`} className='card tc grow bg-whitesmoke br3 pa3 ma2 dib bw2 shadow-5'>
                                                     <div >
                                                         <h3 >{item.title}</h3>
                                                         <p>{item.text}</p>
-                                                        <h6>{item.date.slice(0, 10)}</h6>
+                                                        {/* <h6>{(item.date).slice(0, 10).replace('-0', '.').replace('-', '.')}</h6> */}
+                                                        <h6>{item.date.slice(0, 10).replace('-0', '.').replace('-', '.')}</h6>
+
                                                     </div>
                                                 </Link>
                                             </div>
@@ -112,7 +149,7 @@ const Home = () => {
                     </Droppable>
                 </DragDropContext>
             </div>
-        </div>
+        </div >
     )
 }
 

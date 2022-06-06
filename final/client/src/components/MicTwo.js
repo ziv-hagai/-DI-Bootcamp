@@ -43,9 +43,9 @@ const MicTwo = () => {
     return (
         <div>
             {listening ?
-                <a onClick={add}><AiOutlineCheck /></a>
+                <a className=" white bg-black" onClick={add}><AiOutlineCheck /></a>
                 :
-                <a onClick={SpeechRecognition.startListening}><AiTwotoneAudio /></a>
+                <a className=" white bg-black" onClick={SpeechRecognition.startListening}><AiTwotoneAudio /></a>
             }
         </div>
     );

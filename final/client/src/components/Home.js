@@ -109,8 +109,8 @@ const Home = () => {
                     <input type='text' onChange={(e) => search(e.target.value)} />
                     <AiOutlineSearch />
                 </div>
-                <div className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" ><MicTwo /></div>
-                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={add}><AiOutlinePlus /></a>
+                <div className="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-black" ><MicTwo /></div>
+                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-black" onClick={add}><AiOutlinePlus /></a>
             </div>
             <div id="board">
                 <DragDropContext onDragEnd={handleDrop}>
@@ -134,7 +134,9 @@ const Home = () => {
                                                     <div >
                                                         <h3 >{item.title}</h3>
                                                         <p>{item.text}</p>
-                                                        <h6>{Date(item.date).slice(4, 15).replace(' 0', ' ')}</h6>
+                                                        {/* <h6>{(item.date).slice(0, 10).replace('-0', '.').replace('-', '.')}</h6> */}
+                                                        <h6>{item.date.slice(0, 10).replace('-0', '.').replace('-', '.')}</h6>
+
                                                     </div>
                                                 </Link>
                                             </div>

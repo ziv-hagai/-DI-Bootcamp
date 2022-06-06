@@ -6,7 +6,7 @@ import { Context } from '../App';
 // import "./styles.css";
 import { EmailShareButton, WhatsappShareButton } from "react-share";
 import { EmailIcon, WhatsappIcon } from "react-share";
-import { AiFillEdit, AiFillDelete, AiFillHome, AiOutlineCheck } from "react-icons/ai";
+import { AiFillEdit, AiFillDelete, AiFillHome, AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 const Note = () => {
     const { notes, setNotes, edit, setEdit } = useContext(Context);
@@ -31,7 +31,6 @@ const Note = () => {
     }, []);
 
     const handleChange = (e) => {
-        console.log(e.target.value);
         setColor(e.target.value)
     }
 
@@ -51,6 +50,14 @@ const Note = () => {
 
             })
             .catch(err => console.log(err));
+    }
+
+    const noUpdate = (e) => {
+        e.preventDefault()
+        setTitle(note[0].title)
+        setText(note[0].text)
+        setColor(note[0].color)
+        setEdit(false)
     }
 
     const del = (e) => {
@@ -77,10 +84,8 @@ const Note = () => {
                 note.map(item => {
                     return (
                         edit ?
-                            <div key={item.id} id='editable' style={{ backgroundColor: color }}>
-                                <form onSubmit={update}>
-                                    <input type='text' onChange={(e) => setTitle(e.target.value)} value={title} />
-                                    <textarea type='text' onChange={(e) => setText(e.target.value)} value={text} />
+                            <div>
+                                <div id="up" >
                                     <label className="white">
                                         <input type="radio" name="color" value="white" onChange={handleChange} />
                                         <div className="button"><span></span></div>
@@ -97,45 +102,55 @@ const Note = () => {
                                         <input type="radio" name="color" value="yellow" onChange={handleChange} />
                                         <div className="button"><span></span></div>
                                     </label>
-
-                                    <button className="submit f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" type='submit' ><AiOutlineCheck /></button>
-
-                                </form>
-                            </div>
-                            :
-                            <div key={item.id} style={{ backgroundColor: item.color }}>
-                                <h2>{item.title}</h2>
-                                <p>{item.text}</p>
-                                <Link to={`/`}> <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray"><AiFillHome /></a></Link>
-                                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={editMode}><AiFillEdit /></a>
-                                <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={del}><AiFillDelete /></a>
-                                <div className="share">
-                                    <EmailShareButton
-                                        url={""}
-                                        subject={item.title}
-                                        body={item.text + "\n\n(sent from 'notesbook')"}
-                                        className="mail"
-                                    >
-                                        <EmailIcon size={32} round />
-                                    </EmailShareButton>
-                                    <br />
-                                    <WhatsappShareButton
-                                        title={`*${item.title}*\n${item.text}`}
-                                        body={item.text + "\n\n(sent from 'notesbook')"}
-
-                                        url={"\n\n(sent from 'notesbook')"}
-                                        className="wa"
-
-                                    >
-                                        <WhatsappIcon size={32} round />
-                                    </WhatsappShareButton>
+                                    <button className="submit f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={update} ><AiOutlineCheck /></button>
+                                    <button className="submit f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={noUpdate} ><AiOutlineClose /></button>
+                                </div>
+                                <div id="board">
+                                    <div className='oneCard card tc br3 pa3 ma2 dib bw2 shadow-5' key={item.id} id='editable' style={{ backgroundColor: color }}>
+                                        <h2>                                        <input className="tc cardTitle" type='text' onChange={(e) => setTitle(e.target.value)} value={title} /></h2>
+                                        <p><textarea className="tc cardText" type='text' onChange={(e) => setText(e.target.value)} value={text} /></p>
+                                    </div>
                                 </div>
                             </div>
+                            :
+                            <div>
+                                <div id="up" >
+                                    <Link to={`/`}> <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray"><AiFillHome /></a></Link>
+                                    <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={editMode}><AiFillEdit /></a>
+                                    <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib black bg-light-gray" onClick={del}><AiFillDelete /></a>
+                                    <span className="share">
+                                        <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib "><EmailShareButton
+                                            // className='share'
+                                            url={""}
+                                            subject={item.title}
+                                            body={item.text + "\n\n(sent from 'notesbook')"}
+                                        >
+                                            <EmailIcon size={32} round />
+                                        </EmailShareButton></a>
+                                        <a className=" f6 grow no-underline br-pill ph3 pv2 mb2 dib "><WhatsappShareButton
+                                            // className='share'
+                                            title={`*${item.title}*\n${item.text}`}
+                                            body={item.text + "\n\n(sent from 'notesbook')"}
+                                            url={"\n\n(sent from 'notesbook')"}
+                                        >
+                                            <WhatsappIcon size={32} round />
+                                        </WhatsappShareButton></a>
+                                    </span>
+                                </div>
+                                <div id="board">
+                                    <div key={item.id} style={{ backgroundColor: item.color }}
+                                        className='oneCard card tc br3 pa3 ma2 dib bw2 shadow-5'>
+                                        <h2>{item.title}</h2>
+                                        <p>{item.text}</p>
+                                    </div>
+                                </div>
+
+                            </div >
                     )
 
                 })
             }
-        </div>
+        </div >
 
     )
 }
