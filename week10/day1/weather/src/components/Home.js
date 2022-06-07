@@ -7,13 +7,15 @@ class Home extends React.Component {
     render() {
         if (this.props.day[0]) {
             return (
-                <div >
-                    <City
-                        cityKey={this.props.cityKey}
-                        name={this.props.cityName}
-                        img={`https://www.accuweather.com/images/weathericons/${this.props.day[0].WeatherIcon}.svg`}
-                        text={this.props.day[0].WeatherText}
-                        temp={Math.round(this.props.day[0].Temperature.Metric.Value)} />
+                <div>
+                    <div id="city-container">
+                        <City
+                            cityKey={this.props.cityKey}
+                            name={this.props.cityName}
+                            img={`https://www.accuweather.com/images/weathericons/${this.props.day[0].WeatherIcon}.svg`}
+                            text={this.props.day[0].WeatherText}
+                            temp={Math.round(this.props.day[0].Temperature.Metric.Value)} />
+                    </div>
                     <div id='week'>
                         <Week />
                     </div>

@@ -10,9 +10,9 @@ class Top extends React.Component {
         return (
             <div >
 
-                <Navbar bg="white" variant="light">
+                <Navbar className='title' bg="white" >
                     <Container className='top'>
-                        <Navbar.Brand >WHAT'StheWEATHER</Navbar.Brand>
+                        <Navbar.Brand >WHAT'S<span id="the">the</span>WEATHER</Navbar.Brand>
                         {/* <Nav className='links'> */}
                         <span id='switch'>F<Form.Check type="switch" defaultChecked={this.props.metric} onChange={this.props.changeMetric} />C</span>
                         <Link className='nav' to='/' > Home</Link>

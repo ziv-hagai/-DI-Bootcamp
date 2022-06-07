@@ -58,9 +58,10 @@ class City extends React.Component {
 
     render() {
         return (
-            <div >
-                save<input type='checkbox' checked={this.state.isFav} onChange={this.changeFav} />
+            <div id="city"
+            >
                 <h1>{this.props.name}</h1>
+                <input type='checkbox' checked={this.state.isFav} onChange={this.changeFav} />
                 <img src={this.props.img} />
                 <p>{this.props.text}</p>
                 <p>{this.props.metric ? this.props.temp : Math.round(this.props.temp * 1.8 + 32)} &#176;{this.props.metric ? 'C' : 'F'}</p>

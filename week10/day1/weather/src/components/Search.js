@@ -23,10 +23,9 @@ class Search extends React.Component {
 
     render() {
         return (
-            <div >
-
-                <input type='text' placeholder="search..." onChange={(e) => this.handleChange(e)} value={this.state.text}></input>
-                <button onClick={(e) => this.props.complete(this.state.text)}>Q</button>
+            <div id="search-container">
+                <input id="search" type='text' placeholder="search..." onChange={(e) => this.handleChange(e)} value={this.state.text}></input>
+                <button onClick={(e) => this.props.complete(this.state.text)} id="search-btn">Q</button>
                 <div name='list'>
                     {
                         this.props.cities.map((city, i) => {
