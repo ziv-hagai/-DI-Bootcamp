@@ -1,23 +1,57 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import { AppContext } from '../App';
 
 const Login = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [msg, setMsg] = useState('')
-
+    const navigate = useNavigate()
+    const { setAccessToken } = useContext(AppContext)
     useEffect(() => {
         setMsg('')
     }, [])
 
-    const handleAction = (id) => {
-        if (id === 'Register') {
-
-        } else if (id === 'Login') {
-
+    const handleAction = async (id) => {
+        if (id == 'Register') {
+            try {
+                let response = await axios.post('/register', {
+                    email, password
+                }, {
+                    withCredentials: true,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                console.log(response.data);
+                setMsg(response.data.msg)
+            } catch (e) {
+                console.log(e);
+                setMsg(e.response.data.msg)
+            }
+        } else if (id == 'Login') {
+            try {
+                let response = await axios.post('/login', {
+                    email, password
+                }, {
+                    withCredentials: true,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                console.log('login response', response.data);
+                setAccessToken(response.data.accessToken)
+                navigate('/')
+            } catch (e) {
+                console.log('login error', e.response.data.msg);
+                setMsg(e.response.data.msg)
+            }
         }
     }
 

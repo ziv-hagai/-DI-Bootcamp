@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
 import Home from './components/Home';
+import HomeTwo from './components/HomeTwo';
 import Note from './components/Note';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'tachyons';
