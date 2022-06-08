@@ -14,13 +14,18 @@ const Home = (props) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const decode = jwt_decode(accessToken)
-        setUserId(decode.userId)
-        setEmail(decode.email)
-        const expire = decode.exp
-        setExp(new Date(expire * 1000).toString())
-        if (expire * 1000 < new Date().getTime()) {
-            navigate('/login')
+        try {
+            const decode = jwt_decode(accessToken)
+            setUserId(decode.userId)
+            setEmail(decode.email)
+            const expire = decode.exp
+            setExp(new Date(expire * 1000).toString())
+            if (expire * 1000 < new Date().getTime()) {
+                navigate('/login')
+            }
+        }
+        catch (e) {
+            console.log(e);
         }
     }, [])
 

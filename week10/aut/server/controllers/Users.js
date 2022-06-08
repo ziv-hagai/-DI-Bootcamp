@@ -41,12 +41,12 @@ export const login = async (req, res) => {
         const userId = user[0].id;
         const email = user[0].email;
         const accessToken = jwt.sign({ userId, email }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '60s'
+            expiresIn: '30s'
         });
         console.log('token', accessToken);
         res.cookie('token', accessToken, {
             httpOnly: true,
-            maxAge: 60 * 1000
+            maxAge: 30 * 1000
         });
         res.json({ accessToken })
     } catch (e) {

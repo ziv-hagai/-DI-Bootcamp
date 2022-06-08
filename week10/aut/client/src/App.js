@@ -6,7 +6,7 @@ import About from './components/About';
 import Nav from './components/Nav';
 import { ToastContainer } from 'react-toastify'
 import { useState, createContext } from 'react'
-
+import { Aut } from './aut/Aut'
 export const AppContext = createContext(null)
 
 function App() {
@@ -20,8 +20,8 @@ function App() {
           <Route path='/login' element={<Login title='Login' />} />
           <Route path='/register' element={<Login title='Register' />} />
           <Route path='/home' element={<Home />} />
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
+          <Route path='/' element={<Aut><Home /></Aut>} />
+          <Route path='/about' element={<Aut><About /></Aut>} reloadDocument />
         </Routes>
       </div>
     </AppContext.Provider>
