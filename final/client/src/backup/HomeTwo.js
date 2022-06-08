@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import React from 'react';
-import MicTwo from './MicTwo';
+import MicTwo from '../components/MicTwo';
 import { Context } from '../App';
 import { AiFillCaretDown, AiFillCaretUp, AiOutlineClockCircle, AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
 

@@ -2,8 +2,6 @@ import { useState, useEffect, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import React from 'react';
 import { Context } from '../App';
-// import React from "react";
-// import "./styles.css";
 import { EmailShareButton, WhatsappShareButton } from "react-share";
 import { EmailIcon, WhatsappIcon } from "react-share";
 import { AiFillEdit, AiFillDelete, AiFillHome, AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
@@ -21,7 +19,6 @@ const Note = () => {
         fetch(`/notes/n/${params.id}`)
             .then(res => res.json())
             .then(data => {
-                // const arr = data.sort()
                 setNote(data)
                 setTitle(data[0].title);
                 setText(data[0].text)
@@ -70,7 +67,6 @@ const Note = () => {
                 navigate('/')
             })
             .catch(err => console.log(err));
-        // setNote(notes)
     }
 
     const editMode = () => {
@@ -128,7 +124,6 @@ const Note = () => {
                                             <EmailIcon size={32} round />
                                         </EmailShareButton></a>
                                         <a className=" f6 grow no-underline br-pill ph3 pv2 mb2 dib "><WhatsappShareButton
-                                            // className='share'
                                             title={`*${item.title}*\n${item.text}`}
                                             body={item.text + "\n\n(sent from 'notesbook')"}
                                             url={"\n\n(sent from 'notesbook')"}
@@ -151,7 +146,6 @@ const Note = () => {
                 })
             }
         </div >
-
     )
 }
 

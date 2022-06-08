@@ -134,7 +134,6 @@ const Home = () => {
                                                     <div >
                                                         <h3 >{item.title}</h3>
                                                         <p>{item.text}</p>
-                                                        {/* <h6>{(item.date).slice(0, 10).replace('-0', '.').replace('-', '.')}</h6> */}
                                                         <h6>{item.date.slice(0, 10).replace('-0', '.').replace('-', '.')}</h6>
 
                                                     </div>

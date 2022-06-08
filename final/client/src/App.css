@@ -1,13 +1,3 @@
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-#board {
-  width: 100%;
-  height: 100vh;
-}
-
-
 .card {
   width: 300px;
   height: 400px;
@@ -19,32 +9,33 @@ body {
   margin: 5px !important;
 }
 
+p {
+  height: 90%;
+  white-space: pre-line;
+}
 
 .title {
   color: white;
   background-color: #4267B2;
   height: 50px;
-  padding: 10px;
+  padding: 5px;
   margin: 0;
 }
 
 a {
   color: black;
   text-decoration: none;
+  cursor: pointer;
+
 }
 
-.list-container {
+.list-container,
+#board {
   display: flex;
-  width: 100%;
-  /* font-size: 18px; */
   flex-direction: row;
   flex-wrap: wrap;
-
-}
-
-.item-container {
-  display: inline-block;
-
+  justify-content: center;
+  height: 90vh;
 }
 
 .oneCard {
@@ -59,8 +50,8 @@ label>input {
 .button {
   display: inline-block;
   position: relative;
-  width: 33px;
-  height: 33px;
+  width: 30px;
+  height: 30px;
   margin: 5px;
   cursor: pointer;
 }
@@ -68,8 +59,8 @@ label>input {
 .button span {
   display: block;
   position: absolute;
-  width: 33px;
-  height: 33px;
+  width: 30px;
+  height: 30px;
   padding: 0;
   top: 90%;
   left: 50%;
@@ -118,17 +109,8 @@ label>input {
 }
 
 .share {
-  /* display: flex; */
-  /* padding: 5px !important; */
   top: 43px !important;
   position: absolute;
-
-}
-
-.share>* {
-  /* padding: 5px 0 0 0 !important; */
-  /* margin: 5px 0 0 0 !important; */
-  /* bottom: 0 !important; */
 }
 
 .cardTitle {
