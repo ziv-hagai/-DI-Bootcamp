@@ -1,0 +1,152 @@
+body {
+	font-family: 'Nunito', sans-serif;
+}
+
+.navbar {
+	/* font-size: 3vw; */
+
+	/* position: fixed; */
+	/* top: 0; */
+	/* width: 100%; */
+	/* z-index: 1; */
+}
+
+.home {
+	height: 95vh;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+	/* font-size: 1.5em; */
+
+}
+
+a:hover {
+	color: lightgray;
+}
+
+.home-row {
+	margin-top: 50px;
+	height: 100%
+}
+
+.col-4 {
+	background-image: url("orange2.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	/* height: 70vh; */
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#me {
+	width: 90%;
+	border-radius: 100%;
+	padding-bottom: 20px;
+
+}
+
+.col-4>p {
+	color: white;
+	text-align: center;
+}
+
+.col-8 {
+	padding: 0;
+	margin: 0;
+	/* height: 70vh; */
+	position: relative;
+
+}
+
+#bg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	object-fit: cover;
+	z-index: -1;
+
+}
+
+#name {
+	padding: 50px 0 0 50px;
+	/* position: absolute; */
+	height: 100%;
+}
+
+#summery {
+	position: absolute;
+	bottom: 5%;
+	/* margin-top: 30%; */
+	font-size: 1.1rem;
+
+}
+
+h1 {
+	font-size: 10vw;
+	font-weight: bold;
+	color: orange;
+}
+
+h3 {
+	font-size: 3rem;
+	font-size: 5vw;
+
+}
+
+.col {
+	padding: 5%;
+	max-width: 100/3%;
+}
+
+h2 {
+	text-align: center;
+	font-size: 10vw;
+
+}
+
+.stack {
+	/* background-color: black; */
+	align-items: center;
+	padding: 10% 0;
+	color: white;
+}
+
+#logos {
+	display: flex;
+	width: 100%;
+}
+
+.logos>img {
+
+	width: 24%;
+	margin: 4%;
+	height: auto;
+
+}
+
+#react {
+	object-fit: contain;
+	/* max-width: 15%; */
+}
+
+.left>h3 {
+	color: #00A55A;
+}
+
+.center {
+	background-color: #eeeeee;
+
+}
+
+.center>h3 {
+	color: #5E13AB;
+}
+
+.right>h3 {
+	color: #E20050;
+}
