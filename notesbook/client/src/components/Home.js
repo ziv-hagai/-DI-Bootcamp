@@ -131,7 +131,7 @@ const Home = () => {
                                                 {...provided.draggableProps}
                                             >
                                                 <Link style={{ backgroundColor: item.color }} to={`/${item.id}`} className='card tc grow bg-whitesmoke br3 pa3 ma2 dib bw2 shadow-5'>
-                                                    <div >
+                                                    <div id='card'>
                                                         <h3 >{item.title}</h3>
                                                         <p>{item.text}</p>
                                                         <h6>{item.date.slice(0, 10).replace('-0', '.').replace('-', '.')}</h6>
