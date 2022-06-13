@@ -105,7 +105,8 @@ h3 {
 
 h2 {
 	text-align: center;
-	font-size: 10vw;
+	font-size: 5vw;
+	/* max-width: 200px; */
 
 }
 
@@ -116,22 +117,19 @@ h2 {
 	color: white;
 }
 
-#logos {
+.logos {
 	display: flex;
 	width: 100%;
+	justify-content: center;
 }
 
 .logos>img {
-
 	width: 24%;
+	max-width: 200px;
 	margin: 4%;
 	height: auto;
-
-}
-
-#react {
 	object-fit: contain;
-	/* max-width: 15%; */
+
 }
 
 .left>h3 {

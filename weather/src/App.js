@@ -9,6 +9,8 @@ import React from "react";
 import { connect } from 'react-redux';
 import { getLocal } from './redux/actions';
 
+
+
 class App extends React.Component {
   componentDidMount() {
     this.props.getLocal()

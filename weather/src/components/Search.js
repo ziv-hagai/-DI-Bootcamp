@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { complete, choose, showDay, showWeek } from '../redux/actions';
+import { AiOutlineSearch } from "react-icons/ai";
 
 class Search extends React.Component {
     constructor() {
@@ -25,12 +26,13 @@ class Search extends React.Component {
         return (
             <div id="search-container">
                 <input id="search" type='text' placeholder="search..." onChange={(e) => this.handleChange(e)} value={this.state.text}></input>
-                <button onClick={(e) => this.props.complete(this.state.text)} id="search-btn">Q</button>
-                <div name='list'>
+                <button onClick={(e) => this.props.complete(this.state.text)} id="search-btn"><AiOutlineSearch /></button>
+                <div id='list'>
                     {
                         this.props.cities.map((city, i) => {
+                            console.log(city);
                             return (
-                                <div key={i} id={city} onClick={() => this.handleClick(city)}><strong>{city.LocalizedName}</strong><span> ({city.Country.ID})</span></div>
+                                <div key={i} id={city.Key} onClick={() => this.handleClick(city)}><strong>{city.LocalizedName}</strong><span> ({city.Country.ID})</span></div>
                             )
                         })
                     }

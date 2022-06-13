@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { getLocal } from '../redux/actions';
+import { BsHeartFill, BsHeart } from 'react-icons/bs';
+import { IconCheckbox } from "react-icon-checkbox";
 
 class City extends React.Component {
     constructor(props) {
@@ -53,15 +55,21 @@ class City extends React.Component {
             localStorage.setItem('favs', JSON.stringify(newFavs));
             this.setState({ isFav: true })
         }
+        console.log(this.state.isFav);
+
     }
 
 
     render() {
         return (
-            <div id="city"
-            >
+            <div className="city">
+                <IconCheckbox
+                    checked={this.state.isFav}
+                    checkedIcon={<BsHeartFill className='heart' type="heart" />}
+                    uncheckedIcon={<BsHeart className='heart' type="heart-o" />}
+                    onClick={this.changeFav} />
                 <h1>{this.props.name}</h1>
-                <input type='checkbox' checked={this.state.isFav} onChange={this.changeFav} />
+
                 <img src={this.props.img} />
                 <p>{this.props.text}</p>
                 <p>{this.props.metric ? this.props.temp : Math.round(this.props.temp * 1.8 + 32)} &#176;{this.props.metric ? 'C' : 'F'}</p>

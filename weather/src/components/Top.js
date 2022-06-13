@@ -9,22 +9,20 @@ class Top extends React.Component {
     render() {
         return (
             <div >
-
                 <Navbar className='title' bg="white" >
                     <Container className='top'>
                         <Navbar.Brand >WHAT'S<span id="the">the</span>WEATHER</Navbar.Brand>
-                        {/* <Nav className='links'> */}
-                        <span id='switch'>F<Form.Check type="switch" defaultChecked={this.props.metric} onChange={this.props.changeMetric} />C</span>
-                        <Link className='nav' to='/' > Home</Link>
-                        <Link className='nav' to='/favs'> Favorites</Link>
-                        {/* </Nav> */}
+                        <Nav className='links'>
+                            <span id='switch'>F<Form.Check type="switch" defaultChecked={this.props.metric} onChange={this.props.changeMetric} />C</span>
+                            <Link className='nav' to='/' > Home</Link>
+                            <Link className='nav' to='/favs'> Favorites</Link>
+                        </Nav>
                     </Container>
                 </Navbar>
             </div>
         );
     }
 }
-
 
 const mapStateToProps = (state) => {
     return {

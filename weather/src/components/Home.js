@@ -7,8 +7,8 @@ class Home extends React.Component {
     render() {
         if (this.props.day[0]) {
             return (
-                <div>
-                    <div id="city-container">
+                <div id="home">
+                    <div id="home-container">
                         <City
                             cityKey={this.props.cityKey}
                             name={this.props.cityName}
@@ -24,7 +24,7 @@ class Home extends React.Component {
             );
         } else {
             return (
-                <>loading</>
+                <></>
             )
         }
     }
