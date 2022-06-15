@@ -218,9 +218,10 @@ h1 {
 #sec,
 #thi {
 	height: 7vh;
+	margin: -1px 0;
 }
 
 section {
 	min-height: 100vh;
-	padding-bottom: 0 !important;
+	padding-bottom: 0;
 }
